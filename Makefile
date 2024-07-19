@@ -18,4 +18,7 @@ $(T_DIR)/%insert_right: 0-binary_tree_node.c $(BTREE)print.c $(T_DIR)/%main.c %$
 $(T_DIR)/%delete: 0-binary_tree_node.c 2-binary_tree_insert_right.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)delete.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%is_leaf: 0-binary_tree_node.c 2-binary_tree_insert_right.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)is_leaf.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
