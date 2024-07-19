@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -pedantic -std=gnu89 -g
+CFLAGS := -Wall -Werror -Wextra -pedantic -std=gnu89 -g3
 T_DIR := tests
 BTREE := binary_tree_
 
@@ -22,6 +22,9 @@ $(T_DIR)/%is_leaf: 0-binary_tree_node.c 2-binary_tree_insert_right.c $(BTREE)pri
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(T_DIR)/%is_root: 0-binary_tree_node.c 2-binary_tree_insert_right.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)is_root.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(T_DIR)/%preorder: 0-binary_tree_node.c 2-binary_tree_insert_right.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)preorder.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
