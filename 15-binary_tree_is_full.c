@@ -4,6 +4,8 @@
  * binary_tree_is_full - check if binary tree is a full binary tree.
  * @tree: root node of the binary tree.
  *
+ * A full binary tree has all nodes with either 0 or 2 nodes.
+ *
  * Return: 1 if full binary tree, 0 ohterwise.
  */
 int binary_tree_is_full(const binary_tree_t *tree)

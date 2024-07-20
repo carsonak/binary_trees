@@ -55,4 +55,13 @@ $(T_DIR)/%balance: $(COMMON_PREREQUISITES) $(T_DIR)/%main.c %$(BTREE)balance.c
 $(T_DIR)/%is_full: $(COMMON_PREREQUISITES) $(T_DIR)/%main.c %$(BTREE)is_full.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%is_perfect: $(filter-out %insert_left.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)is_perfect.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(T_DIR)/%sibling: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)sibling.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(T_DIR)/%uncle: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)uncle.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
