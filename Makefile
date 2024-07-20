@@ -42,4 +42,7 @@ $(T_DIR)/%depth: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree
 $(T_DIR)/%size: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_insert_left.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)size.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%leaves: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_insert_left.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)leaves.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
