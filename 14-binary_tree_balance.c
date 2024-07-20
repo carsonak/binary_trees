@@ -26,6 +26,8 @@ static size_t btree_height(const binary_tree_t *tree)
  * binary_tree_balance - calculate the balance of a binary tree.
  * @tree: root of the tree.
  *
+ * Balance = Height of left subtree - Height of right subtree.
+ *
  * Return: the calculated balances.
  */
 int binary_tree_balance(const binary_tree_t *tree)

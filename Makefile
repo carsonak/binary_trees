@@ -64,4 +64,7 @@ $(T_DIR)/%sibling: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%
 $(T_DIR)/%uncle: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)uncle.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%ancestor: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %binary_trees_ancestor.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
