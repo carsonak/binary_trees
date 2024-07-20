@@ -27,6 +27,41 @@ int main(void)
 	height = binary_tree_height(root->right);
 	printf("Height from %d: %lu\n", root->right->n, height);
 	height = binary_tree_height(root->left->right);
-	printf("Height from %d: %lu\n", root->left->right->n, height);
+	printf("Height from %d: %lu\n\n", root->left->right->n, height);
+
+	binary_tree_insert_right(root, 28);
+	binary_tree_insert_right(root->right, 666);
+	binary_tree_insert_left(root->right, 100);
+	binary_tree_insert_left(root->right->right, 420);
+	binary_tree_insert_right(root->left, 99);
+	binary_tree_print(root);
+
+	height = binary_tree_height(root);
+	printf("Height from %d: %lu\n", root->n, height); /*98*/
+	height = binary_tree_height(root->left->right);
+	printf("Height from %d: %lu\n", root->left->right->n, height); /*99*/
+	height = binary_tree_height(root->right->right->right);
+	printf("Height from %d: %lu\n", root->right->right->right->n, height); /*128*/
+	height = binary_tree_height(root->right);
+	printf("Height from %d: %lu\n", root->right->n, height); /*28*/
+	height = binary_tree_height(root->right->right->right->right);
+	printf("Height from %d: %lu\n\n", root->right->right->right->right->n, height); /*402*/
+
+	binary_tree_insert_left(root->left->right->right, 67);
+	binary_tree_insert_left(root->left->right, 44);
+	binary_tree_insert_left(root->left->right, 236);
+	binary_tree_insert_left(root->left->right, 888);
+	binary_tree_print(root);
+
+	height = binary_tree_height(root);
+	printf("Height from %d: %lu\n", root->n, height); /*98*/
+	height = binary_tree_height(root->left->right->right->left);
+	printf("Height from %d: %lu\n", root->left->right->right->left->n, height); /*67*/
+	height = binary_tree_height(root->left->right);
+	printf("Height from %d: %lu\n", root->left->right->n, height); /*99*/
+	height = binary_tree_height(root->right->right->left);
+	printf("Height from %d: %lu\n", root->right->right->left->n, height); /*128*/
+	height = binary_tree_height(root->left->right->left->left);
+	printf("Height from %d: %lu\n", root->left->right->left->left->n, height); /*236*/
 	return (0);
 }

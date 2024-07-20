@@ -33,7 +33,10 @@ $(T_DIR)/%inorder: 0-binary_tree_node.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTRE
 $(T_DIR)/%postorder: 0-binary_tree_node.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)postorder.c
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(T_DIR)/%height: 0-binary_tree_node.c 2-binary_tree_insert_right.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)height.c
+$(T_DIR)/%height: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_insert_left.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)height.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(T_DIR)/%depth: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_insert_left.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)depth.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
