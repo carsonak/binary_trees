@@ -30,4 +30,7 @@ $(T_DIR)/%preorder: 0-binary_tree_node.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTR
 $(T_DIR)/%inorder: 0-binary_tree_node.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)inorder.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%postorder: 0-binary_tree_node.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)postorder.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
