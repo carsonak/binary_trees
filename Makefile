@@ -45,4 +45,7 @@ $(T_DIR)/%size: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_
 $(T_DIR)/%leaves: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_insert_left.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)leaves.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%nodes: 0-binary_tree_node.c 2-binary_tree_insert_right.c 1-binary_tree_insert_left.c $(BTREE)print.c $(T_DIR)/%main.c %$(BTREE)nodes.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
