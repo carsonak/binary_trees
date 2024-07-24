@@ -27,6 +27,42 @@ typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
+/**
+ * struct doubly_linked_list - a doubly linked list node.
+ * @next: the next node in the linked list.
+ * @prev: the previous node in the linked list.
+ * @data: the data the linked list node holds.
+ */
+typedef struct doubly_linked_list
+{
+	struct doubly_linked_list *next;
+	struct doubly_linked_list *prev;
+	void *data;
+} dll;
+
+/**
+ * struct double_ended_queue - a deque object.
+ * @size: number of nodes in the list.
+ * @head: a pointer to the head of the queue.
+ * @tail: a pointer to the tail of the queue.
+ * @push_head: pointer to a function that adds nodes to head of the deque.
+ * @push_tail: pointer to a function that adds nodes to tail of the deque.
+ * @pop_head: pointer to a function that deletes nodes from head of the deque.
+ * @pop_tail: pointer to a function that deletes nodes from tail of the deque.
+ * @delete_deque: pointer to a function that frees all items of the deque.
+ */
+typedef struct double_ended_queue
+{
+	size_t size;
+	dll *head;
+	dll *tail;
+	dll *(*push_head)(struct double_ended_queue *, dll *);
+	dll *(*push_tail)(struct double_ended_queue *, dll *);
+	dll *(*pop_head)(struct double_ended_queue *, void (*free_data)(void *));
+	dll *(*pop_tail)(struct double_ended_queue *, void (*free_data)(void *));
+	void (*delete_deque)(struct double_ended_queue *, void (*free_data)(void *));
+} deque;
+
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);

@@ -70,4 +70,7 @@ $(T_DIR)/%ancestor: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/
 $(T_DIR)/%levelorder: $(filter %node.c %print.c %delete.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)levelorder.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%is_complete: $(filter %node.c %print.c %delete.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)is_complete.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean

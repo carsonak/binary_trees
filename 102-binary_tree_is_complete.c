@@ -18,15 +18,6 @@ static dll *push_head(deque *d, dll *node)
 	if (!d || !node)
 		return (NULL);
 
-	node->next = d->head;
-	node->prev = NULL;
-	if (d->head)
-		d->head->prev = node;
-	else
-		d->tail = node;
-
-	d->head = node;
-	d->size++;
 	return (node);
 }
 
@@ -42,15 +33,6 @@ static dll *push_tail(deque *d, dll *node)
 	if (!d || !node)
 		return (NULL);
 
-	node->prev = d->tail;
-	node->next = NULL;
-	if (d->tail)
-		d->tail->next = node;
-	else
-		d->head = node;
-
-	d->tail = node;
-	d->size++;
 	return (node);
 }
 
@@ -63,25 +45,9 @@ static dll *push_tail(deque *d, dll *node)
  */
 static dll *pop_head(deque *d, void (*free_data)(void *))
 {
-	dll *p = NULL;
-
+	(void)free_data;
 	if (!d || !d->head)
 		return (NULL);
-
-	p = d->head;
-	d->head = p->next;
-	if (p == d->tail)
-	{
-		d->tail = NULL;
-		d->size = 0;
-	}
-
-	if (free_data)
-		(*free_data)(p->data);
-
-	free(p);
-	if (d->size)
-		d->size--;
 
 	return (d->head);
 }
@@ -95,25 +61,9 @@ static dll *pop_head(deque *d, void (*free_data)(void *))
  */
 static dll *pop_tail(deque *d, void (*free_data)(void *))
 {
-	dll *p = NULL;
-
+	(void)free_data;
 	if (!d || !d->tail)
 		return (NULL);
-
-	p = d->tail;
-	d->tail = p->prev;
-	if (p == d->head)
-	{
-		d->head = NULL;
-		d->size = 0;
-	}
-
-	if (free_data)
-		(*free_data)(p->data);
-
-	free(p);
-	if (d->size)
-		d->size--;
 
 	return (d->tail);
 }
@@ -125,28 +75,9 @@ static dll *pop_tail(deque *d, void (*free_data)(void *))
  */
 static void delete_deque(deque *d, void (*free_data)(void *))
 {
-	dll *p = NULL;
-
+	(void)free_data;
 	if (!d || !d->head)
 		return;
-
-	p = d->head;
-	while (p->next)
-	{
-		p = p->next;
-		if (free_data)
-			(*free_data)(p->prev->data);
-
-		free(p->prev);
-	}
-
-	if (free_data)
-		(*free_data)(p->data);
-
-	free(p);
-	d->head = NULL;
-	d->tail = NULL;
-	d->size = 0;
 }
 
 /**
@@ -166,39 +97,22 @@ static dll *create_node(void *data)
 }
 
 /**
- * binary_tree_levelorder - walk a binary tree in level order travesal.
+ * binary_tree_is_complete - check if a binary tree is complete.
  * @tree: a pointer to the root node of the tree.
- * @func: a pointer to a function to call for each node.
+ *
+ * A binary tree is complete if all leaf nodes are on the same level.
+ *
+ * Return: 1 if tree is complete, 0 otherwise.
  */
-void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
+int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	size_t i = 0, prev = 0;
-	binary_tree_t *data = NULL;
-	deque btree_dq = {0, NULL, NULL, push_head, push_tail,
-					  pop_head, pop_tail, delete_deque};
+	deque btree_deque = {0, NULL, NULL, push_head, push_tail,
+						 pop_head, pop_tail, delete_deque};
 
-	if (!tree || !func)
-		return;
+	if (!tree)
+		return (0);
 
-	if (!btree_dq.push_head(&btree_dq, create_node((void *)tree)))
-		return;
+	btree_deque.push_head(&btree_deque, create_node((void *)tree));
 
-	while (btree_dq.size)
-	{
-		prev = btree_dq.size;
-		for (i = 1; i <= prev; i++)
-		{
-			data = btree_dq.head->data;
-			func(data->n);
-			if (data->left)
-				if (!btree_dq.push_tail(&btree_dq, create_node(data->left)))
-					btree_dq.delete_deque(&btree_dq, NULL);
-
-			if (data->right)
-				if (!btree_dq.push_tail(&btree_dq, create_node(data->right)))
-					btree_dq.delete_deque(&btree_dq, NULL);
-
-			btree_dq.pop_head(&btree_dq, NULL);
-		}
-	}
+	return (1);
 }
