@@ -28,7 +28,8 @@ static size_t btree_height(const binary_tree_t *tree)
  * @level: an int indicating the level to print.
  * @printer: a pointer to a function used to print data of a node.
  */
-static void btree_printlevel(const binary_tree_t *node, size_t level, void (*printer)(int))
+static void btree_printlevel(
+	const binary_tree_t *node, size_t level, void (*printer)(int))
 {
 	if (!node || !level || !printer)
 		return;
@@ -47,6 +48,8 @@ static void btree_printlevel(const binary_tree_t *node, size_t level, void (*pri
  * binary_tree_levelorder - walk a binary tree in level order travesal.
  * @tree: a pointer to the root node of the tree.
  * @func: a pointer to a function to call for each node.
+ *
+ * Time complexity: O(n!)
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
