@@ -76,4 +76,7 @@ $(T_DIR)/%is_complete: $(filter %node.c %print.c %delete.c,$(COMMON_PREREQUISITE
 $(T_DIR)/%rotate_left: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)rotate_left.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%rotate_right: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)rotate_right.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
