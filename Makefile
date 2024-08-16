@@ -79,4 +79,7 @@ $(T_DIR)/%rotate_left: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DI
 $(T_DIR)/%rotate_right: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)rotate_right.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%is_bst: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)is_bst.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
