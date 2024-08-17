@@ -51,7 +51,7 @@ bst_t *bst_remove(bst_t *root, int value)
 	if (to_delete->right)
 	{
 		successor = next_inorder(to_delete->right);
-		/* Pop successor from original position. */
+		/* Pop successor from its original position. */
 		if (successor->right)
 			successor->right->parent = successor->parent;
 
@@ -61,7 +61,7 @@ bst_t *bst_remove(bst_t *root, int value)
 			to_delete->left->parent = successor;
 
 		to_delete->right->parent = successor;
-		/* Replace node to be deleted with the successor. */
+		/* Update successor's pointers . */
 		successor->left = to_delete->left;
 		successor->right = to_delete->right;
 	}
