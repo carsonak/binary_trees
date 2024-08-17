@@ -3,7 +3,7 @@ CFLAGS := -Wall -Werror -Wextra -pedantic -std=gnu89 -g3
 T_DIR := tests
 BTREE := binary_tree_
 BST := bst_
-COMMON_PREREQUISITES := $(BTREE)print.c 0-$(BTREE)node.c 2-$(BTREE)insert_right.c 1-$(BTREE)insert_left.c 3-$(BTREE)delete.c 111-$(BST)insert.c
+COMMON_PREREQUISITES := $(BTREE)print.c 0-$(BTREE)node.c 2-$(BTREE)insert_right.c 1-$(BTREE)insert_left.c 3-$(BTREE)delete.c 111-$(BST)insert.c 112-array_to_bst.c
 
 clean:
 	@$(RM) -v $(shell find $(T_DIR) ! -name "*.c" -a -type f)
@@ -87,6 +87,9 @@ $(T_DIR)/%insert: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%m
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(T_DIR)/%array_to_bst: $(filter %node.c %print.c %insert.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %array_to_bst.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(T_DIR)/%search: $(filter %print.c %node.c %insert.c %array_to_bst.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BST)search.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
