@@ -6,6 +6,14 @@
  * @min: mininum value of a node.
  * @max: maximum value of a node.
  *
+ * Properties of a binary search tree:
+ * 1. The left subtree of a node contains only nodes with values less than the
+ * node’s value.
+ * 2. The right subtree of a node contains only nodes with values greater than
+ * the node’s value.
+ * 3. The left and right subtree each must also be a binary search tree.
+ * 4. There must be no duplicate values.
+ *
  * Return: 1 if the tree is a bst, 0 otherwise.
  */
 static int is_bst(const binary_tree_t *tree, const int *min, const int *max)

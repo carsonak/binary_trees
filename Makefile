@@ -2,6 +2,7 @@ CC := gcc
 CFLAGS := -Wall -Werror -Wextra -pedantic -std=gnu89 -g3
 T_DIR := tests
 BTREE := binary_tree_
+BST := bst_
 COMMON_PREREQUISITES := $(BTREE)print.c 0-$(BTREE)node.c 2-$(BTREE)insert_right.c 1-$(BTREE)insert_left.c 3-$(BTREE)delete.c
 
 clean:
@@ -80,6 +81,9 @@ $(T_DIR)/%rotate_right: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_D
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(T_DIR)/%is_bst: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)is_bst.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(T_DIR)/%insert: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BST)insert.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 .PHONY: clean
