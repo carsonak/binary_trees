@@ -92,4 +92,7 @@ $(T_DIR)/%array_to_bst: $(filter %node.c %print.c %insert.c,$(COMMON_PREREQUISIT
 $(T_DIR)/%search: $(filter %print.c %node.c %insert.c %array_to_bst.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BST)search.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%remove: $(filter %print.c %node.c %insert.c %array_to_bst.c %delete.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BST)remove.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
