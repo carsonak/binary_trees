@@ -6,15 +6,32 @@
  *
  * Return: pointer to the next in order node.
  */
-bst_t *next_inorder(bst_t *root)
+static bst_t *next_inorder(bst_t *root)
 {
-	if (!root)
-		return (NULL);
-
-	if (!root->left)
+	if (!root || !root->left)
 		return (root);
 
 	return (next_inorder(root->left));
+}
+
+/**
+ * bstsearch - searches a binary search tree for value.
+ * @tree: pointer to the root node of the tree.
+ * @value: the value to search for.
+ *
+ * Return: pointer to the node with the value, NULL otherwise.
+ */
+static bst_t *bstsearch(const bst_t *tree, int value)
+{
+	while (tree && tree->n != value)
+	{
+		if (value < tree->n)
+			tree = tree->left;
+		else if (value > tree->n)
+			tree = tree->right;
+	}
+
+	return ((bst_t *)tree);
 }
 
 /**
@@ -26,17 +43,8 @@ bst_t *next_inorder(bst_t *root)
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
-	bst_t **node = &root, *to_delete = NULL, *successor = NULL;
+	bst_t *successor = NULL, *to_delete = bstsearch(root, value);
 
-	while (*node && (*node)->n != value)
-	{
-		if (value < (*node)->n)
-			*node = (*node)->left;
-		else if (value > (*node)->n)
-			*node = (*node)->right;
-	}
-
-	to_delete = *node;
 	if (!to_delete)
 		return (root);
 
@@ -61,7 +69,17 @@ bst_t *bst_remove(bst_t *root, int value)
 		successor = to_delete->left;
 
 	successor->parent = to_delete->parent;
-	*node = successor;
+	/* Update the parent node. */
+	if (to_delete->parent)
+	{
+		if (to_delete->parent->left == to_delete)
+			to_delete->parent->left = successor;
+		else
+			to_delete->parent->right = successor;
+	}
+	else
+		root = successor;
+
 	free(to_delete);
 	return (root);
 }
