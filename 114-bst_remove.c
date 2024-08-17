@@ -45,17 +45,17 @@ bst_t *bst_remove(bst_t *root, int value)
 {
 	bst_t *successor = NULL, *to_delete = bstsearch(root, value);
 
-	if (!to_delete)
-		return (root);
-
-	if (to_delete->right)
+	if (to_delete && to_delete->right)
 	{
 		successor = next_inorder(to_delete->right);
 		/* Pop successor from its original position. */
 		if (successor->right)
 			successor->right->parent = successor->parent;
 
-		successor->parent->left = successor->right;
+		if (successor == to_delete->right)
+			to_delete->right = successor->right;
+		else
+			successor->parent->left = successor->right;
 		/* Update left and right nodes of the node to be deleted. */
 		if (to_delete->left)
 			to_delete->left->parent = successor;
@@ -65,13 +65,13 @@ bst_t *bst_remove(bst_t *root, int value)
 		successor->left = to_delete->left;
 		successor->right = to_delete->right;
 	}
-	else
+	else if (to_delete && to_delete->left)
 		successor = to_delete->left;
 
 	if (successor)
 		successor->parent = to_delete->parent;
 	/* Update the parent node. */
-	if (to_delete->parent)
+	if (to_delete && to_delete->parent)
 	{
 		if (to_delete->parent->left == to_delete)
 			to_delete->parent->left = successor;
