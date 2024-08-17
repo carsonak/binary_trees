@@ -68,7 +68,8 @@ bst_t *bst_remove(bst_t *root, int value)
 	else
 		successor = to_delete->left;
 
-	successor->parent = to_delete->parent;
+	if (successor)
+		successor->parent = to_delete->parent;
 	/* Update the parent node. */
 	if (to_delete->parent)
 	{
