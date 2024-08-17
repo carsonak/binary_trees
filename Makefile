@@ -95,4 +95,7 @@ $(T_DIR)/%search: $(filter %print.c %node.c %insert.c %array_to_bst.c,$(COMMON_P
 $(T_DIR)/%remove: $(filter %print.c %node.c %insert.c %array_to_bst.c %delete.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BST)remove.c
 	$(CC) $(CFLAGS) $^ -o $@
 
+$(T_DIR)/%is_avl: $(filter %node.c %print.c,$(COMMON_PREREQUISITES)) $(T_DIR)/%main.c %$(BTREE)is_avl.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 .PHONY: clean
