@@ -1,2 +1,6 @@
 # ignore vscode configs
 .vscode
+
+# ignore binary files
+tests/*
+!tests/*.c
