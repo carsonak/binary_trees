@@ -14,7 +14,7 @@ BINARY_TREE_BASICS = $(BASIC_FILES) $(DELETION_FILES) $(INSERTION_FILES)
 BASIC_BST_FILES := 111-$(BST_PREFIX)insert.c $(BASIC_FILES)
 ARR_BST := 112-array_to_bst.c
 
-BASIC_AVL_FILES := 14-$(BINARY_TREE_PREFIX)balance.c  103-$(BINARY_TREE_PREFIX)rotate_left.c  104-$(BINARY_TREE_PREFIX)rotate_right.c $(BASIC_FILES)
+BASIC_AVL_FILES := 121-$(AVL_PREFIX)insert.c 14-$(BINARY_TREE_PREFIX)balance.c  103-$(BINARY_TREE_PREFIX)rotate_left.c  104-$(BINARY_TREE_PREFIX)rotate_right.c $(BASIC_FILES)
 
 C_STANDARD := -std=gnu89
 SANITIZERS := -fsanitize=address,undefined
@@ -117,5 +117,8 @@ $(TESTS_BIN_DIR)/%remove: $(BASIC_BST_FILES) $(DELETION_FILES) $(TESTS_DIR)/%mai
 $(TESTS_BIN_DIR)/%is_avl: $(BASIC_FILES) $(TESTS_DIR)/%main.c %$(BINARY_TREE_PREFIX)is_avl.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(TESTS_BIN_DIR)/%insert: $(BASIC_AVL_FILES) $(DELETION_FILES) $(TESTS_DIR)/%main.c %$(AVL_PREFIX)insert.c
+$(TESTS_BIN_DIR)/%insert: $(filter-out %$(AVL_PREFIX)insert.c,$(BASIC_AVL_FILES)) $(DELETION_FILES) $(TESTS_DIR)/%main.c %$(AVL_PREFIX)insert.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(TESTS_BIN_DIR)/%array_to_avl: $(BASIC_AVL_FILES) $(DELETION_FILES) $(TESTS_DIR)/%main.c %array_to_avl.c
 	$(CC) $(CFLAGS) -o $@ $^

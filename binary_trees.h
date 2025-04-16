@@ -103,5 +103,6 @@ bst_t *bst_search(bst_t *tree, const int value);
 bst_t *bst_remove(bst_t *root, const int value);
 int binary_tree_is_avl(const binary_tree_t *const tree);
 avl_t *avl_insert(avl_t **const tree, const int value);
+avl_t *array_to_avl(const int *const array, const size_t size);
 
 #endif /* BINARY_TREES_H */

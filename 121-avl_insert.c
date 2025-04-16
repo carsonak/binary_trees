@@ -71,7 +71,7 @@ static void avl_rebalance(avl_t **const root, avl_t *const edited_node)
 			if (binary_tree_balance(current->right) > 0)
 				current->right = binary_tree_rotate_right(current->right);
 
-			current = binary_tree_rotate_left(current);
+			*parent_link = binary_tree_rotate_left(current);
 		}
 		else
 		{
@@ -79,10 +79,9 @@ static void avl_rebalance(avl_t **const root, avl_t *const edited_node)
 			if (binary_tree_balance(current->left) < 0)
 				current->left = binary_tree_rotate_left(current->left);
 
-			current = binary_tree_rotate_right(current);
+			*parent_link = binary_tree_rotate_right(current);
 		}
 
-		*parent_link = current;
 		break;
 	}
 }
@@ -102,6 +101,9 @@ avl_t *avl_insert(avl_t **const tree, const int value)
 		return (NULL);
 
 	new_node = bst_insert(tree, value);
+	if (!new_node)
+		return (NULL);
+
 	avl_rebalance(tree, new_node->parent);
 	return (new_node);
 }
