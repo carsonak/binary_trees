@@ -25,11 +25,7 @@ avl_t *array_to_avl(const int *const array, size_t size)
 {
 	avl_t *tree = NULL;
 
-	if (!array || !size)
-		return (NULL);
-
-	tree = calloc(1, sizeof(*tree));
-	if (!tree)
+	if (!array || size < 1)
 		return (NULL);
 
 	while (size > 0)
