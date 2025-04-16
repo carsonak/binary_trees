@@ -69,6 +69,8 @@ typedef struct double_ended_queue
 	);
 } deque;
 
+binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root);
+
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
@@ -104,5 +106,6 @@ bst_t *bst_remove(bst_t *root, const int value);
 int binary_tree_is_avl(const binary_tree_t *const tree);
 avl_t *avl_insert(avl_t **const tree, const int value);
 avl_t *array_to_avl(const int *const array, const size_t size);
+avl_t *avl_remove(avl_t *root, const int value);
 
 #endif /* BINARY_TREES_H */
