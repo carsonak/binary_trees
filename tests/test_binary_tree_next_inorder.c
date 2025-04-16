@@ -1,5 +1,7 @@
 #include "../binary_trees.h"
 
+binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root);
+
 /**
  * main - test binary_tree_next_inorder.
  *

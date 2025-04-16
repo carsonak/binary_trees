@@ -37,13 +37,13 @@ bst_t *bst_insert(bst_t **tree, const int value)
 }
 
 /**
- * avl_rebalance - walk up an edited subtree and rebalance it if needed.
+ * avl_rebalance_insert - walk up an edited subtree and rebalance it if needed.
  * @root: pointer to the address of the root node of the AVL tree.
  * @edited_node: pointer to the node that has an added or deleted child.
  *
  * Return: pointer to the rebalanced subtree.
  */
-static void avl_rebalance(avl_t **const root, avl_t *const edited_node)
+void avl_rebalance_insert(avl_t **const root, avl_t *const edited_node)
 {
 	avl_t *current = NULL;
 
@@ -104,6 +104,6 @@ avl_t *avl_insert(avl_t **const tree, const int value)
 	if (!new_node)
 		return (NULL);
 
-	avl_rebalance(tree, new_node->parent);
+	avl_rebalance_insert(tree, new_node->parent);
 	return (new_node);
 }
