@@ -276,7 +276,7 @@ StatementMacros:
     - QT_REQUIRE_VERSION
 TableGenBreakInsideDAGArg: DontBreak
 TabWidth: 4
-UseTab: AlignWithSpaces
+UseTab: ForContinuationAndIndentation
 VerilogBreakBetweenInstancePorts: true
 WhitespaceSensitiveMacros:
     - BOOST_PP_STRINGIZE

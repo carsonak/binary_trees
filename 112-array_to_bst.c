@@ -1,13 +1,13 @@
 #include "binary_trees.h"
 
 /**
- * bstsearch - searches a binary search tree for value.
+ * BST_search - searches a binary search tree for value.
  * @tree: pointer to the root node of the tree.
  * @value: the value to search for.
  *
  * Return: pointer to the node with the value, NULL otherwise.
  */
-static bst_t *bstsearch(bst_t *tree, const int value)
+static bst_t *BST_search(bst_t *tree, const int value)
 {
 	while (tree && tree->n != value)
 	{
@@ -51,7 +51,7 @@ bst_t *array_to_bst(const int *const array, const size_t size)
 
 	for (i = 0; i < size; i++)
 	{
-		if (!bst_insert(&tree, array[i]) && !bstsearch(tree, array[i]))
+		if (!bst_insert(&tree, array[i]) && !BST_search(tree, array[i]))
 		{
 			btree_delete(tree);
 			return (NULL);
