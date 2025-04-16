@@ -12,7 +12,8 @@
  *
  * Return: length of printed tree after process
  */
-static int print_t(const binary_tree_t *tree, int offset, int depth, char **s)
+static int
+print_t(const binary_tree_t *const tree, int offset, int depth, char **s)
 {
 	char b[6];
 	int width, left, right, is_left, i;
@@ -52,7 +53,7 @@ static int print_t(const binary_tree_t *tree, int offset, int depth, char **s)
  *
  * Return: The height of the tree starting at @node
  */
-static size_t _height(const binary_tree_t *tree)
+static size_t _height(const binary_tree_t *const tree)
 {
 	size_t height_l;
 	size_t height_r;
@@ -67,7 +68,7 @@ static size_t _height(const binary_tree_t *tree)
  *
  * @tree: Pointer to the root node of the tree to print
  */
-void binary_tree_print(const binary_tree_t *tree)
+void binary_tree_print(const binary_tree_t *const tree)
 {
 	char **s;
 	size_t height, i, j;

@@ -7,7 +7,7 @@
  *
  * Return: pointer to the node with the value, NULL otherwise.
  */
-static bst_t *bstsearch(const bst_t *tree, int value)
+static bst_t *bstsearch(bst_t *tree, const int value)
 {
 	while (tree && tree->n != value)
 	{
@@ -17,7 +17,7 @@ static bst_t *bstsearch(const bst_t *tree, int value)
 			tree = tree->right;
 	}
 
-	return ((bst_t *)tree);
+	return (tree);
 }
 
 /**
@@ -41,7 +41,7 @@ static void btree_delete(binary_tree_t *tree)
  *
  * Return: pointer to the root node of the bst, NULL on failure.
  */
-bst_t *array_to_bst(int *array, size_t size)
+bst_t *array_to_bst(const int *const array, const size_t size)
 {
 	bst_t *tree = NULL;
 	size_t i = 0;

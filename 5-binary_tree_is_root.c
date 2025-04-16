@@ -6,7 +6,7 @@
  *
  * Return: 1 if node is root, 0 otherwise.
  */
-int binary_tree_is_root(const binary_tree_t *node)
+int binary_tree_is_root(const binary_tree_t *const node)
 {
 	if (node && !node->parent)
 		return (1);

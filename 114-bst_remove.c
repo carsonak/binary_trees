@@ -6,7 +6,7 @@
  *
  * Return: pointer to the next in order node.
  */
-static bst_t *next_inorder(bst_t *root)
+static bst_t *next_inorder(bst_t *const root)
 {
 	if (!root || !root->left)
 		return (root);
@@ -21,7 +21,7 @@ static bst_t *next_inorder(bst_t *root)
  *
  * Return: pointer to the node with the value, NULL otherwise.
  */
-static bst_t *bstsearch(const bst_t *tree, int value)
+static bst_t *bstsearch(bst_t *tree, const int value)
 {
 	while (tree && tree->n != value)
 	{
@@ -31,7 +31,7 @@ static bst_t *bstsearch(const bst_t *tree, int value)
 			tree = tree->right;
 	}
 
-	return ((bst_t *)tree);
+	return (tree);
 }
 
 /**
@@ -41,7 +41,7 @@ static bst_t *bstsearch(const bst_t *tree, int value)
  *
  * Return: new root node of the tree.
  */
-bst_t *bst_remove(bst_t *root, int value)
+bst_t *bst_remove(bst_t *root, const int value)
 {
 	bst_t *successor = NULL, *to_delete = bstsearch(root, value);
 

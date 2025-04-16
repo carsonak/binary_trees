@@ -6,7 +6,7 @@
  *
  * Return: the number of nodes in the tree.
  */
-size_t binary_tree_size(const binary_tree_t *tree)
+size_t binary_tree_size(const binary_tree_t *const tree)
 {
 	if (!tree)
 		return (0);

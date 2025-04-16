@@ -2,9 +2,9 @@
 
 static dll *push_head(deque *d, dll *node);
 static dll *push_tail(deque *d, dll *node);
-static dll *pop_head(deque *d, void (*)(void *));
-static dll *pop_tail(deque *, void (*)(void *));
-static void delete_deque(deque *d, void (*)(void *));
+static dll *pop_head(deque *d, void (*)(binary_tree_t *));
+static dll *pop_tail(deque *, void (*)(binary_tree_t *));
+static void delete_deque(deque *d, void (*)(binary_tree_t *));
 
 /**
  * push_head - add a doubly linked list node to the head of the deque.
@@ -61,7 +61,7 @@ static dll *push_tail(deque *d, dll *node)
  *
  * Return: pointer to the head of the deque.
  */
-static dll *pop_head(deque *d, void (*free_data)(void *))
+static dll *pop_head(deque *d, void (*free_data)(binary_tree_t *))
 {
 	dll *p = NULL;
 
@@ -93,7 +93,7 @@ static dll *pop_head(deque *d, void (*free_data)(void *))
  *
  * Return: pointer to the tail of the deque.
  */
-static dll *pop_tail(deque *d, void (*free_data)(void *))
+static dll *pop_tail(deque *d, void (*free_data)(binary_tree_t *))
 {
 	dll *p = NULL;
 
@@ -123,7 +123,7 @@ static dll *pop_tail(deque *d, void (*free_data)(void *))
  * @d: pointer to an object like deque.
  * @free_data: pointer to a function that frees data in a deque node.
  */
-static void delete_deque(deque *d, void (*free_data)(void *))
+static void delete_deque(deque *d, void (*free_data)(binary_tree_t *))
 {
 	dll *p = NULL;
 
@@ -155,7 +155,7 @@ static void delete_deque(deque *d, void (*free_data)(void *))
  *
  * Return: pointer to the created node.
  */
-static dll *create_node(void *data)
+static dll *create_node(binary_tree_t *const data)
 {
 	dll *node = calloc(1, sizeof(*node));
 
@@ -171,7 +171,7 @@ static dll *create_node(void *data)
  *
  * Return: 1 if the tree is complete, 0 otherwise.
  */
-int binary_tree_is_complete(const binary_tree_t *tree)
+int binary_tree_is_complete(binary_tree_t *const tree)
 {
 	unsigned char is_last_node = 0;
 	size_t i = 0, prev = 0;
@@ -182,7 +182,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	if (!tree)
 		return (0);
 
-	if (!btree_dq.push_head(&btree_dq, create_node((void *)tree)))
+	if (!btree_dq.push_head(&btree_dq, create_node(tree)))
 		return (0);
 
 	while (btree_dq.size)
@@ -198,7 +198,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 			{
 				if (is_last_node ||
 					!btree_dq.push_tail(&btree_dq, create_node(data->left)))
-					goto cleanup_return0;
+					goto error_cleanup;
 
 				if (!data->right)
 					is_last_node = 1;
@@ -208,7 +208,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 			{
 				if (is_last_node ||
 					!btree_dq.push_tail(&btree_dq, create_node(data->right)))
-					goto cleanup_return0;
+					goto error_cleanup;
 			}
 
 			btree_dq.pop_head(&btree_dq, NULL);
@@ -216,7 +216,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	}
 
 	return (1);
-cleanup_return0:
+error_cleanup:
 	btree_dq.delete_deque(&btree_dq, NULL);
 	return (0);
 }

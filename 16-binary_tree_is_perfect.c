@@ -6,7 +6,7 @@
  *
  * Return: height of node.
  */
-static size_t btree_height(const binary_tree_t *tree)
+static size_t btree_height(const binary_tree_t *const tree)
 {
 	size_t height_left = 0, height_right = 0;
 
@@ -28,7 +28,7 @@ static size_t btree_height(const binary_tree_t *tree)
  *
  * Return: the calculated balances.
  */
-static int btree_balance(const binary_tree_t *tree)
+static int btree_balance(const binary_tree_t *const tree)
 {
 	size_t height_left = 0, height_right = 0;
 
@@ -50,7 +50,7 @@ static int btree_balance(const binary_tree_t *tree)
  *
  * Return: 1 if full binary tree, 0 ohterwise.
  */
-static int btree_is_full(const binary_tree_t *tree)
+static int btree_is_full(const binary_tree_t *const tree)
 {
 	if (!tree || (tree->left && !tree->right) || (!tree->left && tree->right))
 		return (0);
@@ -72,7 +72,7 @@ static int btree_is_full(const binary_tree_t *tree)
  *
  * Return: 1 if tree is perfect, 0 otherwise.
  */
-int binary_tree_is_perfect(const binary_tree_t *tree)
+int binary_tree_is_perfect(const binary_tree_t *const tree)
 {
 	if (btree_is_full(tree))
 	{

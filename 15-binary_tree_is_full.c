@@ -8,7 +8,7 @@
  *
  * Return: 1 if full binary tree, 0 ohterwise.
  */
-int binary_tree_is_full(const binary_tree_t *tree)
+int binary_tree_is_full(const binary_tree_t *const tree)
 {
 	if (!tree || (tree->left && !tree->right) || (!tree->left && tree->right))
 		return (0);

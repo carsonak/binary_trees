@@ -29,8 +29,9 @@ int main(void)
 	root->left->right->left = binary_tree_node(root->left->right, 240);
 	root->left->right->right = binary_tree_node(root->left->right, 540);
 	binary_tree_print(root);
-	printf("Rotate-left %d\n", root->n);
+	printf("Rotate-left %d\n", root->left->n);
 	root->left = binary_tree_rotate_left(root->left);
 	binary_tree_print(root);
+
 	return (0);
 }

@@ -3,11 +3,11 @@
 /**
  * bst_insert - adds an item into a binary search tree.
  * @tree: address of a pointer to the root of a bst.
- * @value: the value to insert into the binary search tree.
+ * @value: the value to insert.
  *
  * Return: pointer to the newly added node, NULL on failure.
  */
-bst_t *bst_insert(bst_t **tree, int value)
+bst_t *bst_insert(bst_t **tree, const int value)
 {
 	bst_t *new_node = NULL, *parent = NULL;
 
@@ -23,7 +23,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 			tree = &(*tree)->left;
 	}
 
-	/* Ensures no duplicates in the tree */
+	/* Only insert new node if no duplicate was found. */
 	if (!(*tree))
 		new_node = binary_tree_node(*tree, value);
 

@@ -6,7 +6,7 @@
  *
  * Return: height of node.
  */
-static size_t btree_height(const binary_tree_t *tree)
+static size_t btree_height(const binary_tree_t *const tree)
 {
 	size_t height_left = 0, height_right = 0;
 
@@ -30,7 +30,7 @@ static size_t btree_height(const binary_tree_t *tree)
  *
  * Return: the calculated balances.
  */
-int binary_tree_balance(const binary_tree_t *tree)
+int binary_tree_balance(const binary_tree_t *const tree)
 {
 	size_t height_left = 0, height_right = 0;
 

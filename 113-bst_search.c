@@ -7,7 +7,7 @@
  *
  * Return: pointer to the node with the value, NULL otherwise.
  */
-bst_t *bst_search(const bst_t *tree, int value)
+bst_t *bst_search(bst_t *tree, const int value)
 {
 	while (tree && tree->n != value)
 	{
@@ -17,5 +17,5 @@ bst_t *bst_search(const bst_t *tree, int value)
 			tree = tree->right;
 	}
 
-	return ((bst_t *)tree);
+	return (tree);
 }

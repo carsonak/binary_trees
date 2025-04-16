@@ -2,9 +2,9 @@
 
 static dll *push_head(deque *d, dll *node);
 static dll *push_tail(deque *d, dll *node);
-static dll *pop_head(deque *d, void (*)(void *));
-static dll *pop_tail(deque *, void (*)(void *));
-static void delete_deque(deque *d, void (*)(void *));
+static dll *pop_head(deque *d, void (*)(binary_tree_t *));
+static dll *pop_tail(deque *, void (*)(binary_tree_t *));
+static void delete_deque(deque *d, void (*)(binary_tree_t *));
 
 /**
  * push_head - add a doubly linked list node to the head of the deque.
@@ -61,7 +61,7 @@ static dll *push_tail(deque *d, dll *node)
  *
  * Return: pointer to the head of the deque.
  */
-static dll *pop_head(deque *d, void (*free_data)(void *))
+static dll *pop_head(deque *d, void (*free_data)(binary_tree_t *))
 {
 	dll *p = NULL;
 
@@ -93,7 +93,7 @@ static dll *pop_head(deque *d, void (*free_data)(void *))
  *
  * Return: pointer to the tail of the deque.
  */
-static dll *pop_tail(deque *d, void (*free_data)(void *))
+static dll *pop_tail(deque *d, void (*free_data)(binary_tree_t *))
 {
 	dll *p = NULL;
 
@@ -123,7 +123,7 @@ static dll *pop_tail(deque *d, void (*free_data)(void *))
  * @d: pointer to an object like deque.
  * @free_data: pointer to a function that frees data in a deque node.
  */
-static void delete_deque(deque *d, void (*free_data)(void *))
+static void delete_deque(deque *d, void (*free_data)(binary_tree_t *))
 {
 	dll *p = NULL;
 
@@ -155,7 +155,7 @@ static void delete_deque(deque *d, void (*free_data)(void *))
  *
  * Return: pointer to the created node.
  */
-static dll *create_node(void *data)
+static dll *create_node(binary_tree_t *const data)
 {
 	dll *node = calloc(1, sizeof(*node));
 
@@ -170,7 +170,7 @@ static dll *create_node(void *data)
  * @tree: a pointer to the root node of the tree.
  * @func: a pointer to a function to call for each node.
  */
-void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
+void binary_tree_levelorder(binary_tree_t *const tree, void (*func)(int))
 {
 	size_t i = 0, prev = 0;
 	binary_tree_t *data = NULL;
@@ -180,7 +180,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 	if (!tree || !func)
 		return;
 
-	if (!btree_dq.push_head(&btree_dq, create_node((void *)tree)))
+	if (!btree_dq.push_head(&btree_dq, create_node(tree)))
 		return;
 
 	while (btree_dq.size)
@@ -190,13 +190,19 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 		{
 			data = btree_dq.head->data;
 			func(data->n);
-			if (data->left)
-				if (!btree_dq.push_tail(&btree_dq, create_node(data->left)))
-					btree_dq.delete_deque(&btree_dq, NULL);
+			if (data->left &&
+			    !btree_dq.push_tail(&btree_dq, create_node(data->left)))
+			{
+				btree_dq.delete_deque(&btree_dq, NULL);
+				break;
+			}
 
-			if (data->right)
-				if (!btree_dq.push_tail(&btree_dq, create_node(data->right)))
-					btree_dq.delete_deque(&btree_dq, NULL);
+			if (data->right &&
+			    !btree_dq.push_tail(&btree_dq, create_node(data->right)))
+			{
+				btree_dq.delete_deque(&btree_dq, NULL);
+				break;
+			}
 
 			btree_dq.pop_head(&btree_dq, NULL);
 		}

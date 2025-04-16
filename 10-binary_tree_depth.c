@@ -7,7 +7,7 @@
  *
  * Return: depth calculated.
  */
-static size_t btree_depth_rec(const binary_tree_t *node, size_t depth)
+static size_t btree_depth_rec(const binary_tree_t *const node, size_t depth)
 {
 	if (!node || !node->parent)
 		return (depth);
@@ -21,7 +21,7 @@ static size_t btree_depth_rec(const binary_tree_t *node, size_t depth)
  *
  * Return: depth of the node.
  */
-size_t binary_tree_depth(const binary_tree_t *tree)
+size_t binary_tree_depth(const binary_tree_t *const tree)
 {
 	return (btree_depth_rec(tree, 0));
 }

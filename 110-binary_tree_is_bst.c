@@ -3,12 +3,17 @@
 /**
  * is_bst - traverses a binary tree to check if it is a bst.
  * @tree: root node of the tree.
- * @min: mininum value of a node.
- * @max: maximum value of a node.
+ * @min: pointer to the mininum value of a node.
+ * @max: pointer to the maximum value of a node.
+ *
+ * `min` and `max` need to be pointers since their initial values are
+ * undetermined.
  *
  * Return: 1 if the tree is a bst, 0 otherwise.
  */
-static int is_bst(const binary_tree_t *tree, const int *min, const int *max)
+static int is_bst(
+	const binary_tree_t *const tree, const int *const min, const int *const max
+)
 {
 	if (!tree)
 		return (1);
@@ -37,7 +42,7 @@ static int is_bst(const binary_tree_t *tree, const int *min, const int *max)
  *
  * Return: 1 if the tree is a bst, 0 otherwise.
  */
-int binary_tree_is_bst(const binary_tree_t *tree)
+int binary_tree_is_bst(const binary_tree_t *const tree)
 {
 	if (!tree)
 		return (0);

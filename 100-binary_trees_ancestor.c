@@ -7,7 +7,7 @@
  *
  * Return: depth calculated.
  */
-static size_t btree_depth_rec(const binary_tree_t *node, size_t depth)
+static size_t btree_depth_rec(const binary_tree_t *const node, size_t depth)
 {
 	if (!node || !node->parent)
 		return (depth);
@@ -21,7 +21,7 @@ static size_t btree_depth_rec(const binary_tree_t *node, size_t depth)
  *
  * Return: depth of the node.
  */
-size_t btree_depth(const binary_tree_t *tree)
+size_t btree_depth(const binary_tree_t *const tree)
 {
 	return (btree_depth_rec(tree, 0));
 }
@@ -33,8 +33,8 @@ size_t btree_depth(const binary_tree_t *tree)
  *
  * Return: pointer to the lowest common ancestor, NULL if none.
  */
-binary_tree_t *binary_trees_ancestor(
-	const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *
+binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
 {
 	binary_tree_t *ancestor = NULL;
 	long int depth_diff = 0;
