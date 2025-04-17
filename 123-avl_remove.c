@@ -175,11 +175,14 @@ avl_t *avl_remove(avl_t *root, const int value)
 		return (NULL);
 
 	to_delete = BST_search(root, value);
+	if (!to_delete)
+		return (root);
+
 	successor = binary_tree_unlink_node(to_delete);
 	if (!to_delete->parent)
 		root = successor;
 
-	avl_rebalance_remove(&root, successor);
+	avl_rebalance_remove(&root, to_delete->parent);
 	free(to_delete);
 	return (root);
 }
