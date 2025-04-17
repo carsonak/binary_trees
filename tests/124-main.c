@@ -44,7 +44,7 @@ int build_and_print_tree(const int *const array, const size_t array_size)
 
 struct int_array
 {
-	size_t size;
+	const size_t size;
 	const int *array;
 };
 

@@ -1,3 +1,5 @@
+#include <inttypes.h> /* intmax_t */
+
 #include "binary_trees.h"
 
 #define INT_IS_ODD(int_to_test) (int_to_test % 2)
@@ -12,11 +14,11 @@
  * Return: pointer to the current node being created.
  */
 avl_t *split_merge_to_tree(
-	avl_t *const parent, const int *const array, const size_t size
+	avl_t *const parent, const int *const array, const intmax_t size
 )
 {
 	avl_t *tree = NULL;
-	size_t mid_point = 0, left_size = 0, right_size = 0;
+	intmax_t mid_point = 0, left_size = 0, right_size = 0;
 
 	if (!array || size < 1)
 		return (NULL);
