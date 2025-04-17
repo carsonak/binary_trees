@@ -17,7 +17,7 @@ BASIC_BST_FILES := 111-$(BST_PREFIX)insert.c $(BASIC_FILES)
 ARR_AVL := 122-array_to_avl.c
 BASIC_AVL_FILES := 121-$(AVL_PREFIX)insert.c 14-$(BINARY_TREE_PREFIX)balance.c  103-$(BINARY_TREE_PREFIX)rotate_left.c  104-$(BINARY_TREE_PREFIX)rotate_right.c $(BASIC_FILES)
 
-C_STANDARD := -std=gnu89
+C_STANDARD := --std=gnu89
 SANITIZERS := -fsanitize=address,undefined
 WARN_FLAGS := -Wall -Werror -Wextra -pedantic
 DEBUG_FLAGS := -fno-omit-frame-pointer -g3
@@ -128,4 +128,8 @@ $(TESTS_BIN_DIR)/%array_to_avl: $(BASIC_AVL_FILES) $(DELETION_FILES) $(TESTS_DIR
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TESTS_BIN_DIR)/%remove: $(BASIC_AVL_FILES) $(ARR_AVL) $(DELETION_FILES) $(TESTS_DIR)/%main.c %$(AVL_PREFIX)remove.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(TESTS_BIN_DIR)/%sorted_array_to_avl: C_STANDARD:=--std=c99
+$(TESTS_BIN_DIR)/%sorted_array_to_avl: $(BASIC_FILES) $(DELETION_FILES) $(TESTS_DIR)/%main.c %sorted_array_to_avl.c
 	$(CC) $(CFLAGS) -o $@ $^
