@@ -16,6 +16,10 @@ int main(void)
 
 	binary_tree_print(tree);
 
+	tree = bst_remove(tree, 1024); /* Does not exist. */
+	printf("Removed 1024...\n");
+	binary_tree_print(tree);
+
 	tree = bst_remove(tree, 79); /* Root node. */
 	printf("Removed 79...\n");
 	binary_tree_print(tree);
@@ -25,6 +29,10 @@ int main(void)
 	binary_tree_print(tree);
 
 	tree = bst_remove(tree, 68); /* Successor is left. */
+	printf("Removed 68...\n");
+	binary_tree_print(tree);
+
+	tree = bst_remove(tree, 68); /* Double remove. */
 	printf("Removed 68...\n");
 	binary_tree_print(tree);
 

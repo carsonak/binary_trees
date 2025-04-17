@@ -182,7 +182,11 @@ avl_t *avl_remove(avl_t *root, const int value)
 	if (!to_delete->parent)
 		root = successor;
 
-	avl_rebalance_remove(&root, to_delete->parent);
+	if (successor)
+		avl_rebalance_remove(&root, successor);
+	else
+		avl_rebalance_remove(&root, to_delete->parent);
+
 	free(to_delete);
 	return (root);
 }
