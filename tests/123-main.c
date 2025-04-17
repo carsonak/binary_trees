@@ -10,12 +10,13 @@ int main(void)
 	avl_t *tree;
 	int array[] = {79, 47, 68, 87, 84, 91, 21, 32,
 				   34, 2,  20, 22, 98, 1,  62, 95};
-	int array2[] = {98, 110, 43, 56, 2, 78, 123, 76, 234};
+	int array2[] = {56, 43, 123, 2, 78, 234, 76};
 
 	tree = array_to_avl(array, sizeof(array) / sizeof(array[0]));
 	if (!tree)
 		return (1);
 
+	printf("Original tree:\n");
 	binary_tree_print(tree);
 
 	tree = avl_remove(tree, 1024); /* Remove node that does not exist. */
@@ -57,15 +58,12 @@ int main(void)
 	if (!tree)
 		return (1);
 
-	printf("\n\n");
+	printf("\n\nOriginal tree:\n");
 	binary_tree_print(tree);
 
-	tree = avl_remove(tree, 98);
-	binary_tree_print(tree);
-	tree = avl_remove(tree, 110);
-	binary_tree_print(tree);
 	/* Remove left heavy parent, BF after: left 2 */
 	tree = avl_remove(tree, 123);
+	printf("Removed 123...\n");
 	binary_tree_print(tree);
 
 	binary_tree_delete(tree);
