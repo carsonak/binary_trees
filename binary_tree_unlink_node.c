@@ -8,7 +8,7 @@
  *
  * Return: pointer to the successor node.
  */
-static binary_tree_t *binary_tree_unlink_node(binary_tree_t *const to_unlink)
+binary_tree_t *binary_tree_unlink_node(binary_tree_t *const to_unlink)
 {
 	binary_tree_t *successor = NULL;
 
@@ -41,7 +41,7 @@ static binary_tree_t *binary_tree_unlink_node(binary_tree_t *const to_unlink)
 		if (to_unlink->left)
 			to_unlink->left->parent = successor;
 
-		if (successor != to_unlink->right)
+		if (to_unlink->right)
 			to_unlink->right->parent = successor;
 	}
 

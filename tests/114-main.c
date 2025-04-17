@@ -7,8 +7,8 @@
  */
 int main(void)
 {
-	int array[] = {79, 47, 68, 87, 84, 91, 21, 32, 34,
-				   2,  20, 22, 98, 1,  62, 95, 96};
+	int array[] = {79, 47, 68, 87, 84,  91, 21, 32, 34,
+				   2,  20, 22, 98, 100, 1,  62, 95, 96};
 	bst_t *tree = array_to_bst(array, sizeof(array) / sizeof(array[0]));
 
 	if (!tree)
@@ -39,6 +39,10 @@ int main(void)
 	/* Successor is right.left, but it has a right child */
 	tree = bst_remove(tree, 91);
 	printf("Removed 91...\n");
+	binary_tree_print(tree);
+
+	tree = bst_remove(tree, 98); /* Successor is right leaf node. */
+	printf("Removed 98...\n");
 	binary_tree_print(tree);
 
 	binary_tree_delete(tree);
