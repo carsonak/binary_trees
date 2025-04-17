@@ -21,16 +21,17 @@ static void tree_delete(binary_tree_t *tree)
  *
  * Return: pointer to the created AVL tree.
  */
-avl_t *array_to_avl(const int *const array, size_t size)
+avl_t *array_to_avl(const int *const array, const size_t size)
 {
 	avl_t *tree = NULL;
+	size_t i = 0;
 
 	if (!array || size < 1)
 		return (NULL);
 
-	while (size > 0)
+	for (i = 0; i < size; ++i)
 	{
-		if (!avl_insert(&tree, array[--size]))
+		if (!avl_insert(&tree, array[i]))
 		{
 			tree_delete(tree);
 			return (NULL);
