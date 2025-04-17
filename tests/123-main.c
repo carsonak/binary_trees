@@ -36,6 +36,8 @@ int main(void)
 	tree = avl_remove(tree, 22);
 	printf("Removed 22...\n");
 	binary_tree_print(tree);
+
 	binary_tree_delete(tree);
+	avl_remove(NULL, 87);
 	return (0);
 }

@@ -46,5 +46,6 @@ int main(void)
 	binary_tree_print(tree);
 
 	binary_tree_delete(tree);
+	bst_remove(NULL, 1);
 	return (0);
 }

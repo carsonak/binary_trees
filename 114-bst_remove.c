@@ -118,9 +118,14 @@ binary_tree_t *binary_tree_unlink_node(binary_tree_t *const to_unlink)
  */
 bst_t *bst_remove(bst_t *root, const int value)
 {
-	bst_t *to_delete = BST_search(root, value);
-	bst_t *successor = binary_tree_unlink_node(to_delete);
+	bst_t *to_delete = NULL;
+	bst_t *successor = NULL;
 
+	if (!root)
+		return (NULL);
+
+	to_delete = BST_search(root, value);
+	successor = binary_tree_unlink_node(to_delete);
 	if (!to_delete->parent)
 		root = successor;
 
