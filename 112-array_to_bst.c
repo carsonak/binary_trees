@@ -21,16 +21,16 @@ static bst_t *BST_search(bst_t *tree, const int value)
 }
 
 /**
- * btree_delete - free a binary tree data structure.
+ * _tree_delete - free a binary tree data structure.
  * @tree: root node of the tree.
  */
-static void btree_delete(binary_tree_t *tree)
+static void _tree_delete(binary_tree_t *tree)
 {
 	if (!tree)
 		return;
 
-	btree_delete(tree->left);
-	btree_delete(tree->right);
+	_tree_delete(tree->left);
+	_tree_delete(tree->right);
 	free(tree);
 }
 
@@ -46,14 +46,14 @@ bst_t *array_to_bst(const int *const array, const size_t size)
 	bst_t *tree = NULL;
 	size_t i = 0;
 
-	if (!array || !size)
+	if (!array || size < 1)
 		return (NULL);
 
 	for (i = 0; i < size; i++)
 	{
-		if (!bst_insert(&tree, array[i]) && !BST_search(tree, array[i]))
+		if (!BST_search(tree, array[i]) && !bst_insert(&tree, array[i]))
 		{
-			btree_delete(tree);
+			_tree_delete(tree);
 			return (NULL);
 		}
 	}

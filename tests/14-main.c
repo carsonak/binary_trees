@@ -66,6 +66,9 @@ int main(void)
     balance = binary_tree_balance(root->right->right->left);
     printf("Balance at %d: %d\n", root->right->right->left->n, balance); /*128*/
     balance = binary_tree_balance(root->left->right->left->left);
-    printf("Balance at %d: %d\n", root->left->right->left->left->n, balance); /*236*/
-    return (0);
+	printf(
+		"Balance at %d: %d\n", root->left->right->left->left->n, balance
+	); /*236*/
+	binary_tree_delete(root);
+	return (0);
 }

@@ -59,5 +59,7 @@ int main(void)
 	printf("Is %d full: %d\n", root->right->n, full);
 	full = binary_tree_is_full(root->left->left);
 	printf("Is %d full: %d\n", root->left->left->n, full);
+
+	binary_tree_delete(root);
 	return (0);
 }

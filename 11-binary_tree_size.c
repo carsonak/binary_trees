@@ -4,6 +4,8 @@
  * binary_tree_size - calculate size of a binary tree.
  * @tree: root node to start from.
  *
+ * size = number of nodes in the binary tree.
+ *
  * Return: the number of nodes in the tree.
  */
 size_t binary_tree_size(const binary_tree_t *const tree)

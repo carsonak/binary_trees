@@ -62,6 +62,9 @@ int main(void)
     leaves = binary_tree_leaves(root->right->right->left);
     printf("Leaves from %d: %lu\n", root->right->right->left->n, leaves); /*128*/
     leaves = binary_tree_leaves(root->left->right->left->left);
-    printf("Leaves from %d: %lu\n", root->left->right->left->left->n, leaves); /*236*/
-    return (0);
+	printf(
+		"Leaves from %d: %lu\n", root->left->right->left->left->n, leaves
+	); /*236*/
+	binary_tree_delete(root);
+	return (0);
 }

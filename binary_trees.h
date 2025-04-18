@@ -1,6 +1,7 @@
 #ifndef BINARY_TREES_H
 #define BINARY_TREES_H
 
+#include <inttypes.h> /* intmax_t */
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,7 +54,7 @@ typedef struct doubly_linked_node
  */
 typedef struct double_ended_queue
 {
-	size_t size;
+	intmax_t size;
 	dln *head;
 	dln *tail;
 } deque;

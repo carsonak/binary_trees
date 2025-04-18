@@ -41,6 +41,8 @@ int main(void)
 	avl = binary_tree_is_avl(root);
 	printf("Is %d avl: %d\n", root->n, avl);
 
+	binary_tree_delete(root);
+
 	root = basic_tree();
 	root->right->right->right = binary_tree_node(root->right->right, 430);
 	binary_tree_print(root);
@@ -51,5 +53,7 @@ int main(void)
 	binary_tree_print(root);
 	avl = binary_tree_is_avl(root);
 	printf("Is %d avl: %d\n", root->n, avl);
+
+	binary_tree_delete(root);
 	return (0);
 }

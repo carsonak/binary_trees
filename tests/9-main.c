@@ -62,6 +62,9 @@ int main(void)
 	height = binary_tree_height(root->right->right->left);
 	printf("Height from %d: %lu\n", root->right->right->left->n, height); /*128*/
 	height = binary_tree_height(root->left->right->left->left);
-	printf("Height from %d: %lu\n", root->left->right->left->left->n, height); /*236*/
+	printf(
+		"Height from %d: %lu\n", root->left->right->left->left->n, height
+	); /*236*/
+	binary_tree_delete(root);
 	return (0);
 }

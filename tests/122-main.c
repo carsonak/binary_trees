@@ -10,7 +10,7 @@ int main(void)
 	avl_t *tree;
 	const int array[] = {79, 47, 68, 87, 84, 91, 21, 32,
 						 34, 2,  20, 22, 98, 1,  62, 95};
-	const int array2[] = {98, 110, 43, 56, 2, 78, 123, 76, 234};
+	const int array2[] = {98, 98, 110, 43, 56, 2, 78, 123, 123, 76, 234};
 
 	tree = array_to_avl(array, sizeof(array) / sizeof(array[0]));
 	if (!tree)

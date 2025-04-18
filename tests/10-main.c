@@ -62,6 +62,9 @@ int main(void)
     depth = binary_tree_depth(root->right->right->left);
     printf("Depth from %d: %lu\n", root->right->right->left->n, depth); /*128*/
     depth = binary_tree_depth(root->left->right->left->left);
-    printf("Depth from %d: %lu\n", root->left->right->left->left->n, depth); /*236*/
-    return (0);
+	printf(
+		"Depth from %d: %lu\n", root->left->right->left->left->n, depth
+	); /*236*/
+	binary_tree_delete(root);
+	return (0);
 }

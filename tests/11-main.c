@@ -62,6 +62,9 @@ int main(void)
     size = binary_tree_size(root->right->right->left);
     printf("Size from %d: %lu\n", root->right->right->left->n, size); /*128*/
     size = binary_tree_size(root->left->right->left->left);
-    printf("Size from %d: %lu\n", root->left->right->left->left->n, size); /*236*/
-    return (0);
+	printf(
+		"Size from %d: %lu\n", root->left->right->left->left->n, size
+	); /*236*/
+	binary_tree_delete(root);
+	return (0);
 }

@@ -5,15 +5,15 @@
 #define INT_IS_ODD(int_to_test) (int_to_test % 2)
 
 /**
- * split_merge_to_tree - recursively split the array into halves adding nodes
- * to the tree in a pre-order fashion.
+ * split_merge_into_tree - recursively split an array into halves, adding the
+ * middle node to the tree in a pre-order fashion.
  * @parent: pointer to the parent of the current node being created.
  * @array: pointer to the first element of the array.
  * @size: number of elements in the array.
  *
- * Return: pointer to the current node being created.
+ * Return: pointer to the created node.
  */
-avl_t *split_merge_to_tree(
+avl_t *split_merge_into_tree(
 	avl_t *const parent, const int *const array, const intmax_t size
 )
 {
@@ -33,8 +33,8 @@ avl_t *split_merge_to_tree(
 		--left_size;
 
 	tree = binary_tree_node(parent, array[mid_point - 1]);
-	tree->left = split_merge_to_tree(tree, array, left_size);
-	tree->right = split_merge_to_tree(tree, &array[mid_point], right_size);
+	tree->left = split_merge_into_tree(tree, array, left_size);
+	tree->right = split_merge_into_tree(tree, &array[mid_point], right_size);
 	return (tree);
 }
 
@@ -52,5 +52,5 @@ avl_t *sorted_array_to_avl(const int *const array, const size_t size)
 	if (!array || size < 1)
 		return (NULL);
 
-	return (split_merge_to_tree(NULL, array, size));
+	return (split_merge_into_tree(NULL, array, size));
 }

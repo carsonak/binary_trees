@@ -31,5 +31,7 @@ int main(void)
 
 	binary_tree_print(root);
 	binary_tree_inorder(root, &print_num);
+
+	binary_tree_delete(root);
 	return (0);
 }

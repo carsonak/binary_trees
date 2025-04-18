@@ -41,6 +41,7 @@ int main(void)
 	node = avl_insert(&root, 50);
 	printf("\nInserted: %d\n", node->n);
 	binary_tree_print(root);
+
 	binary_tree_delete(root);
 	return (0);
 }

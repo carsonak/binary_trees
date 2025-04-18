@@ -44,5 +44,7 @@ int main(void)
 	binary_tree_print(root);
 	perfect = binary_tree_is_perfect(root);
 	printf("Perfect: %d\n", perfect);
+
+	binary_tree_delete(root);
 	return (0);
 }

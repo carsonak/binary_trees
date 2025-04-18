@@ -1,6 +1,26 @@
 #include "binary_trees.h"
 
 /**
+ * BST_search - searches a binary search tree for value.
+ * @tree: pointer to the root node of the tree.
+ * @value: the value to search for.
+ *
+ * Return: pointer to the node with the value, NULL otherwise.
+ */
+static bst_t *BST_search(bst_t *tree, const int value)
+{
+	while (tree && tree->n != value)
+	{
+		if (value < tree->n)
+			tree = tree->left;
+		else if (value > tree->n)
+			tree = tree->right;
+	}
+
+	return (tree);
+}
+
+/**
  * binary_tree_next_inorder - get the next in order node.
  * @root: pointer to the starting node.
  *
@@ -37,26 +57,6 @@ binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root)
 	}
 
 	return (node);
-}
-
-/**
- * BST_search - searches a binary search tree for value.
- * @tree: pointer to the root node of the tree.
- * @value: the value to search for.
- *
- * Return: pointer to the node with the value, NULL otherwise.
- */
-static bst_t *BST_search(bst_t *tree, const int value)
-{
-	while (tree && tree->n != value)
-	{
-		if (value < tree->n)
-			tree = tree->left;
-		else if (value > tree->n)
-			tree = tree->right;
-	}
-
-	return (tree);
 }
 
 /**
@@ -125,6 +125,9 @@ bst_t *bst_remove(bst_t *root, const int value)
 		return (NULL);
 
 	to_delete = BST_search(root, value);
+	if (!to_delete)
+		return (root);
+
 	successor = binary_tree_unlink_node(to_delete);
 	if (!to_delete->parent)
 		root = successor;

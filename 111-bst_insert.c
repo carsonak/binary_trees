@@ -7,31 +7,38 @@
  *
  * Return: pointer to the newly added node, NULL on failure.
  */
-bst_t *bst_insert(bst_t **tree, const int value)
+bst_t *bst_insert(bst_t **const tree, const int value)
 {
-	bst_t *new_node = NULL, *parent = NULL;
+	bst_t *new_node = NULL, *walk = NULL, *parent = NULL, **parent_link = tree;
 
 	if (!tree)
 		return (NULL);
 
-	while (*tree && (*tree)->n != value)
+	/* Search for where to insert the new node. */
+	walk = *tree;
+	while (walk && walk->n != value)
 	{
-		parent = *tree;
-		if ((*tree)->n < value)
-			tree = &(*tree)->right;
-		else if ((*tree)->n > value)
-			tree = &(*tree)->left;
+		parent = walk;
+		if (walk->n < value)
+		{
+			parent_link = &walk->right;
+			walk = walk->right;
+		}
+		else if (walk->n > value)
+		{
+			parent_link = &walk->left;
+			walk = walk->left;
+		}
 	}
 
 	/* Only insert new node if no duplicate was found. */
-	if (!(*tree))
-		new_node = binary_tree_node(*tree, value);
+	if (walk)
+		return (NULL);
 
-	if (new_node)
-	{
-		new_node->parent = parent;
-		*tree = new_node;
-	}
+	new_node = binary_tree_node(parent, value);
+	if (!new_node)
+		return (NULL);
 
+	*parent_link = new_node;
 	return (new_node);
 }

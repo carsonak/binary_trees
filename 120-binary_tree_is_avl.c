@@ -29,12 +29,12 @@ static int is_bst(
 }
 
 /**
- * btree_height - calculate height of a binary tree.
+ * _tree_height - calculate height of a binary tree.
  * @tree: root node to to start calculating from.
  *
  * Return: height of node.
  */
-static size_t btree_height(const binary_tree_t *const tree)
+static size_t _tree_height(const binary_tree_t *const tree)
 {
 	size_t height_left = 0, height_right = 0;
 
@@ -42,23 +42,23 @@ static size_t btree_height(const binary_tree_t *const tree)
 		return (0);
 
 	if (tree->left)
-		height_left = btree_height(tree->left) + 1;
+		height_left = _tree_height(tree->left) + 1;
 
 	if (tree->right)
-		height_right = btree_height(tree->right) + 1;
+		height_right = _tree_height(tree->right) + 1;
 
 	return (height_left > height_right ? height_left : height_right);
 }
 
 /**
- * btree_balance - calculate the balance of a binary tree.
+ * _tree_balance - calculate the balance of a binary tree.
  * @tree: root of the tree.
  *
  * Balance = Height of left subtree - Height of right subtree.
  *
  * Return: the calculated balances.
  */
-static int btree_balance(const binary_tree_t *const tree)
+static int _tree_balance(const binary_tree_t *const tree)
 {
 	size_t height_left = 0, height_right = 0;
 
@@ -66,31 +66,32 @@ static int btree_balance(const binary_tree_t *const tree)
 		return (0);
 
 	if (tree->left)
-		height_left = btree_height(tree->left) + 1;
+		height_left = _tree_height(tree->left) + 1;
 
 	if (tree->right)
-		height_right = btree_height(tree->right) + 1;
+		height_right = _tree_height(tree->right) + 1;
 
 	return (height_left - height_right);
 }
 
 /**
- * avl_balanced - checks if a AVL tree is balanced.
+ * avl_is_balanced - checks if a AVL tree is balanced.
  * @tree: pointer to the root of the avl tree.
  * @deviation: the deviation of balance.
  *
  * Return: 1 if AVL tree is balanced, 0 otherwise.
  */
 static int
-avl_balanced(const binary_tree_t *const tree, const size_t deviation)
+avl_is_balanced(const binary_tree_t *const tree, const size_t deviation)
 {
 	if (!tree)
 		return (1);
 
 	return (
-		(abs(btree_balance(tree)) <= deviation) &&
-		avl_balanced(tree->left, deviation) &&
-		avl_balanced(tree->right, deviation));
+		(abs(_tree_balance(tree)) <= deviation) &&
+		avl_is_balanced(tree->left, deviation) &&
+		avl_is_balanced(tree->right, deviation)
+	);
 }
 
 /**
@@ -110,5 +111,5 @@ int binary_tree_is_avl(const binary_tree_t *const tree)
 	if (!tree)
 		return (0);
 
-	return (is_bst(tree, NULL, NULL) && avl_balanced(tree, 1));
+	return (is_bst(tree, NULL, NULL) && avl_is_balanced(tree, 1));
 }

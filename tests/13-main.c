@@ -62,6 +62,10 @@ int main(void)
     inodes = binary_tree_nodes(root->right->right->left);
     printf("Internal nodes from %d: %lu\n", root->right->right->left->n, inodes); /*128*/
     inodes = binary_tree_nodes(root->left->right->left->left);
-    printf("Internal nodes from %d: %lu\n", root->left->right->left->left->n, inodes); /*236*/
-    return (0);
+	printf(
+		"Internal nodes from %d: %lu\n", root->left->right->left->left->n,
+		inodes
+	); /*236*/
+	binary_tree_delete(root);
+	return (0);
 }
