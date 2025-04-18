@@ -88,7 +88,8 @@ $(TESTS_BIN_DIR)/%sibling: $(BASIC_FILES) $(TESTS_DIR)/%main.c %$(BINARY_TREE_PR
 $(TESTS_BIN_DIR)/%uncle: $(BASIC_FILES) $(TESTS_DIR)/%main.c %$(BINARY_TREE_PREFIX)uncle.c
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(TESTS_BIN_DIR)/%ancestor: $(BASIC_FILES) $(TESTS_DIR)/%main.c %binary_trees_ancestor.c
+$(TESTS_BIN_DIR)/%ancestor: C_STANDARD:=--std=c99
+$(TESTS_BIN_DIR)/%ancestor: $(BASIC_FILES) $(DELETION_FILES) $(TESTS_DIR)/%main.c %binary_trees_ancestor.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TESTS_BIN_DIR)/%levelorder: $(BASIC_FILES) $(DELETION_FILES) $(TESTS_DIR)/%main.c %$(BINARY_TREE_PREFIX)levelorder.c

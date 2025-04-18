@@ -3,107 +3,118 @@
 /* Original code from http://stackoverflow.com/a/13755911/5184480 */
 
 /**
- * print_t - Stores recursively each level in an array of strings
+ * _tree_height - calculate the height of a binary tree.
+ * @tree: pointer to the root node of the tree.
  *
- * @tree: Pointer to the node to print
- * @offset: Offset to print
- * @depth: Depth of the node
- * @s: Buffer
- *
- * Return: length of printed tree after process
+ * Return: the height of the tree.
  */
-static int
-print_t(const binary_tree_t *const tree, int offset, int depth, char **s)
+static size_t _tree_height(const binary_tree_t *const tree)
 {
-	char b[6];
-	int width, left, right, is_left, i;
+	const size_t height_l = tree->left ? 1 + _tree_height(tree->left) : 0;
+	const size_t height_r = tree->right ? 1 + _tree_height(tree->right) : 0;
+
+	return (height_l > height_r ? height_l : height_r);
+}
+
+/**
+ * draw_tree - traverse a binary tree in-order drawing out the nodes and
+ * their links onto string buffers.
+ * @tree: pointer to the current root node of the tree.
+ * @left_margin: left offset into the canvas to start drawing the tree at.
+ * @depth: depth of the current root node.
+ * @canvas: array of string buffers.
+ *
+ * Return: new left margin offset after printing the node.
+ */
+static int draw_tree(
+	const binary_tree_t *const tree, const int left_margin, const int depth,
+	char *const *const canvas
+)
+{
+	char node_data_str[16];
+	int width, left, right, i;
 
 	if (!tree)
 		return (0);
 
-	is_left = (tree->parent && tree->parent->left == tree);
-	width = sprintf(b, "(%03d)", tree->n);
-	left = print_t(tree->left, offset, depth + 1, s);
-	right = print_t(tree->right, offset + left + width, depth + 1, s);
+	left = draw_tree(tree->left, left_margin, depth + 1, canvas);
+	width = sprintf(node_data_str, "(%.3d)", tree->n);
+	right =
+		draw_tree(tree->right, left_margin + left + width, depth + 1, canvas);
 	for (i = 0; i < width; i++)
-		s[depth][offset + left + i] = b[i];
+		canvas[depth][left_margin + left + i] = node_data_str[i];
 
-	if (depth && is_left)
+	if (depth > 0)
 	{
-		for (i = 0; i < width + right; i++)
-			s[depth - 1][offset + left + (width / 2) + i] = '-';
+		unsigned short int is_left =
+			(tree->parent && (tree->parent->left == tree));
 
-		s[depth - 1][offset + left + (width / 2)] = '.';
-	}
-	else if (depth && !is_left)
-	{
-		for (i = 0; i < left + width; i++)
-			s[depth - 1][offset - (width / 2) + i] = '-';
+		if (is_left)
+		{
+			canvas[depth - 1][left_margin + left + (width / 2)] = '.';
+			for (i = 1; i < width + right; i++)
+				canvas[depth - 1][left_margin + left + (width / 2) + i] = '-';
+		}
+		else
+		{
+			for (i = 0; i < left + width; i++)
+				canvas[depth - 1][left_margin - (width / 2) + i] = '-';
 
-		s[depth - 1][offset + left + (width / 2)] = '.';
+			canvas[depth - 1][left_margin + left + (width / 2)] = '.';
+		}
 	}
 
 	return (left + width + right);
 }
 
 /**
- * _height - Measures the height of a binary tree
- *
- * @tree: Pointer to the node to measures the height
- *
- * Return: The height of the tree starting at @node
+ * free_canvas - free a string array.
+ * @canvas: pointer to the array of strings.
+ * @len: number of elements in the array.
  */
-static size_t _height(const binary_tree_t *const tree)
+static void free_canvas(char **canvas, size_t len)
 {
-	size_t height_l;
-	size_t height_r;
+	while (len > 0)
+		free(canvas[--len]);
 
-	height_l = tree->left ? 1 + _height(tree->left) : 0;
-	height_r = tree->right ? 1 + _height(tree->right) : 0;
-	return (height_l > height_r ? height_l : height_r);
+	free(canvas);
 }
 
 /**
- * binary_tree_print - Prints a binary tree
- *
- * @tree: Pointer to the root node of the tree to print
+ * binary_tree_print - print a binary tree.
+ * @tree: pointer to the root node of the tree to print.
  */
 void binary_tree_print(const binary_tree_t *const tree)
 {
-	char **s;
+	char **canvas;
 	size_t height, i, j;
 
 	if (!tree)
 		return;
 
-	height = _height(tree);
-	s = malloc(sizeof(*s) * (height + 1));
-	if (!s)
+	height = _tree_height(tree);
+	canvas = calloc(height + 1, sizeof(*canvas));
+	if (!canvas)
 		return;
 
 	for (i = 0; i < height + 1; i++)
 	{
-		s[i] = malloc(sizeof(**s) * 255);
-		if (!s[i])
-			return;
+		canvas[i] = malloc(sizeof(**canvas) * 256);
+		if (!canvas[i])
+			goto clean_exit;
 
-		memset(s[i], 32, 255);
+		memset(canvas[i], ' ', 256);
 	}
 
-	print_t(tree, 0, 0, s);
+	draw_tree(tree, 0, 0, canvas);
 	for (i = 0; i < height + 1; i++)
 	{
-		for (j = 254; j > 1; --j)
-		{
-			if (s[i][j] != ' ')
-				break;
+		for (j = 255; j > 1 && canvas[i][j] == ' '; --j)
+			canvas[i][j] = '\0';
 
-			s[i][j] = '\0';
-		}
-
-		printf("%s\n", s[i]);
-		free(s[i]);
+		printf("%s\n", canvas[i]);
 	}
 
-	free(s);
+clean_exit:
+	free_canvas(canvas, height + 1);
 }

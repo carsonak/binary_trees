@@ -22,51 +22,40 @@ struct binary_tree_s
 	struct binary_tree_s *right;
 };
 
+#ifndef BINARY_TREES_TYPEDEFS
+	#define BINARY_TREES_TYPEDEFS
+
 typedef struct binary_tree_s binary_tree_t;
 typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
+#endif /* BINARY_TREES_TYPEDEFS */
+
 /**
- * struct doubly_linked_list - a doubly linked list node.
+ * struct doubly_linked_node - a doubly linked list node.
  * @next: the next node in the linked list.
  * @prev: the previous node in the linked list.
  * @data: the data the linked list node holds.
  */
-typedef struct doubly_linked_list
+typedef struct doubly_linked_node
 {
-	struct doubly_linked_list *next;
-	struct doubly_linked_list *prev;
+	struct doubly_linked_node *next;
+	struct doubly_linked_node *prev;
 	binary_tree_t *data;
-} dll;
+} dln;
 
 /**
  * struct double_ended_queue - a deque object.
  * @size: number of nodes in the list.
  * @head: a pointer to the head of the queue.
  * @tail: a pointer to the tail of the queue.
- * @push_head: pointer to a function that adds nodes to head of the deque.
- * @push_tail: pointer to a function that adds nodes to tail of the deque.
- * @pop_head: pointer to a function that deletes nodes from head of the deque.
- * @pop_tail: pointer to a function that deletes nodes from tail of the deque.
- * @delete_deque: pointer to a function that frees all items of the deque.
  */
 typedef struct double_ended_queue
 {
 	size_t size;
-	dll *head;
-	dll *tail;
-	dll *(*push_head)(struct double_ended_queue *, dll *);
-	dll *(*push_tail)(struct double_ended_queue *, dll *);
-	dll *(*pop_head)(
-		struct double_ended_queue *, void (*free_data)(binary_tree_t *)
-	);
-	dll *(*pop_tail)(
-		struct double_ended_queue *, void (*free_data)(binary_tree_t *)
-	);
-	void (*delete_deque)(
-		struct double_ended_queue *, void (*free_data)(binary_tree_t *)
-	);
+	dln *head;
+	dln *tail;
 } deque;
 
 binary_tree_t *binary_tree_unlink_node(binary_tree_t *const to_unlink);
@@ -74,8 +63,10 @@ binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root);
 
 void binary_tree_print(const binary_tree_t *const tree);
 binary_tree_t *binary_tree_node(binary_tree_t *const parent, const int value);
-binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
-binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
+binary_tree_t *
+binary_tree_insert_left(binary_tree_t *const parent, const int value);
+binary_tree_t *
+binary_tree_insert_right(binary_tree_t *const parent, const int value);
 void binary_tree_delete(binary_tree_t *tree);
 int binary_tree_is_leaf(const binary_tree_t *const node);
 int binary_tree_is_root(const binary_tree_t *const node);
@@ -83,7 +74,7 @@ void binary_tree_preorder(const binary_tree_t *const tree, void (*func)(int));
 void binary_tree_inorder(const binary_tree_t *const tree, void (*func)(int));
 void binary_tree_postorder(const binary_tree_t *const tree, void (*func)(int));
 size_t binary_tree_height(const binary_tree_t *const tree);
-size_t binary_tree_depth(const binary_tree_t *const tree);
+size_t binary_tree_depth(const binary_tree_t *tree);
 size_t binary_tree_size(const binary_tree_t *const tree);
 size_t binary_tree_leaves(const binary_tree_t *const tree);
 size_t binary_tree_nodes(const binary_tree_t *const tree);
