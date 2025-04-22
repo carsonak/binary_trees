@@ -59,8 +59,21 @@ typedef struct double_ended_queue
 	dln *tail;
 } deque;
 
+/**
+ * struct node_depth - pointer to a binary tree node and its depth in the tree.
+ * @node: pointer to the binary tree node.
+ * @depth: depth of the node in the tree.
+ */
+typedef struct node_depth
+{
+	const binary_tree_t *node;
+	intmax_t depth;
+} node_depth;
+
 binary_tree_t *binary_tree_unlink_node(binary_tree_t *const to_unlink);
 binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root);
+node_depth bst_smallest(const bst_t *root);
+node_depth bst_largest(const bst_t *root);
 
 void binary_tree_print(const binary_tree_t *const tree);
 binary_tree_t *binary_tree_node(binary_tree_t *const parent, const int value);

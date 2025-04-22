@@ -178,7 +178,7 @@ dln *create_node(binary_tree_t * const data)
  */
 int binary_tree_is_complete(binary_tree_t * const tree)
 {
-	unsigned short int is_last_node = 0;
+	unsigned char is_last_node = 0;
 	deque tree_nodes = {0, NULL, NULL};
 
 	if (!tree)

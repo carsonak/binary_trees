@@ -24,7 +24,7 @@ static size_t _tree_height(const binary_tree_t *const tree)
  * @depth: depth of the current root node.
  * @canvas: array of string buffers.
  *
- * Return: new left margin offset after printing the node.
+ * Return: width of the stringified tree.
  */
 static int draw_tree(
 	const binary_tree_t *const tree, const int left_margin, const int depth,
@@ -32,39 +32,40 @@ static int draw_tree(
 )
 {
 	char node_data_str[16];
-	int width, left, right, i;
+	int data_str_len, left, right, i;
 
 	if (!tree)
 		return (0);
 
 	left = draw_tree(tree->left, left_margin, depth + 1, canvas);
-	width = sprintf(node_data_str, "(%.3d)", tree->n);
-	right =
-		draw_tree(tree->right, left_margin + left + width, depth + 1, canvas);
-	for (i = 0; i < width; i++)
+	data_str_len = sprintf(node_data_str, "(%.3d)", tree->n);
+	right = draw_tree(
+		tree->right, left_margin + left + data_str_len, depth + 1, canvas
+	);
+	for (i = 0; i < data_str_len; i++)
 		canvas[depth][left_margin + left + i] = node_data_str[i];
 
 	if (depth > 0)
 	{
-		unsigned short int is_left =
-			(tree->parent && (tree->parent->left == tree));
+		unsigned char is_left = (tree->parent && (tree->parent->left == tree));
 
 		if (is_left)
 		{
-			canvas[depth - 1][left_margin + left + (width / 2)] = '.';
-			for (i = 1; i < width + right; i++)
-				canvas[depth - 1][left_margin + left + (width / 2) + i] = '-';
+			canvas[depth - 1][left_margin + left + (data_str_len / 2)] = '.';
+			for (i = 1; i < data_str_len + right; i++)
+				canvas[depth - 1]
+					  [left_margin + left + (data_str_len / 2) + i] = '-';
 		}
 		else
 		{
-			for (i = 0; i < left + width; i++)
-				canvas[depth - 1][left_margin - (width / 2) + i] = '-';
+			for (i = 0; i < left + data_str_len; i++)
+				canvas[depth - 1][left_margin - (data_str_len / 2) + i] = '-';
 
-			canvas[depth - 1][left_margin + left + (width / 2)] = '.';
+			canvas[depth - 1][left_margin + left + (data_str_len / 2)] = '.';
 		}
 	}
 
-	return (left + width + right);
+	return (left + data_str_len + right);
 }
 
 /**

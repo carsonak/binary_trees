@@ -1,4 +1,7 @@
 #!/bin/bash
+# Compile tests and run them.
+# This only checks for compile errors and memory leaks,
+# logic errors are not checked.
 
 while read -r line
 do test_files+=("$line")

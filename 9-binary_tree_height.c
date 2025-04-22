@@ -6,7 +6,7 @@
  *
  * height = number of links between root node and farthest leaf node.
  *
- * Return: height of node.
+ * Return: height of the tree.
  */
 size_t binary_tree_height(const binary_tree_t *const tree)
 {
@@ -21,5 +21,5 @@ size_t binary_tree_height(const binary_tree_t *const tree)
 	if (tree->right)
 		height_right = binary_tree_height(tree->right) + 1;
 
-	return (height_right > height_left ? height_right : height_left);
+	return (height_left > height_right ? height_left : height_right);
 }

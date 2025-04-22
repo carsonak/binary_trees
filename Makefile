@@ -6,16 +6,17 @@ BINARY_TREE_PREFIX := binary_tree_
 BST_PREFIX := bst_
 AVL_PREFIX := avl_
 # Common prerequisites
-BASIC_FILES := $(BINARY_TREE_PREFIX)print.c 0-$(BINARY_TREE_PREFIX)node.c
+BINARY_TREE_PRINT := $(shell ls $(BINARY_TREE_PREFIX)print/*.c)
+BASIC_FILES = $(BINARY_TREE_PRINT) 0-$(BINARY_TREE_PREFIX)node.c
 DELETION_FILES := 3-$(BINARY_TREE_PREFIX)delete.c
 INSERTION_FILES := 2-$(BINARY_TREE_PREFIX)insert_right.c 1-$(BINARY_TREE_PREFIX)insert_left.c
 BINARY_TREE_BASICS = $(BASIC_FILES) $(DELETION_FILES) $(INSERTION_FILES)
 
 ARR_BST := 112-array_to_bst.c
-BASIC_BST_FILES := 111-$(BST_PREFIX)insert.c $(BASIC_FILES) $(DELETION_FILES)
+BASIC_BST_FILES = 111-$(BST_PREFIX)insert.c $(BASIC_FILES) $(DELETION_FILES)
 
 ARR_AVL := 122-array_to_avl.c
-BASIC_AVL_FILES := 121-$(AVL_PREFIX)insert.c 14-$(BINARY_TREE_PREFIX)balance.c  103-$(BINARY_TREE_PREFIX)rotate_left.c  104-$(BINARY_TREE_PREFIX)rotate_right.c $(BASIC_FILES) $(DELETION_FILES)
+BASIC_AVL_FILES = 121-$(AVL_PREFIX)insert.c 14-$(BINARY_TREE_PREFIX)balance.c  103-$(BINARY_TREE_PREFIX)rotate_left.c  104-$(BINARY_TREE_PREFIX)rotate_right.c $(BASIC_FILES) $(DELETION_FILES)
 
 C_STANDARD := --std=gnu89
 SANITIZERS := -fsanitize=address,undefined
@@ -30,6 +31,9 @@ clean:
 
 $(TESTS_BIN_DIR):
 	mkdir -p $@
+
+$(TESTS_BIN_DIR)/test_binary_tree_print: $(BASIC_BST_FILES) $(ARR_BST) $(DELETION_FILES) $(TESTS_DIR)/test_binary_tree_print.c | $(TESTS_BIN_DIR)
+	$(CC) $(CFLAGS) -o $@ $^
 
 $(TESTS_BIN_DIR)/test_%: $(BASIC_BST_FILES) $(ARR_BST) $(DELETION_FILES) $(TESTS_DIR)/test_%.c %.c | $(TESTS_BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^

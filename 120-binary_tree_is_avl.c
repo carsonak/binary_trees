@@ -32,7 +32,7 @@ static int is_bst(
  * _tree_height - calculate height of a binary tree.
  * @tree: root node to to start calculating from.
  *
- * Return: height of node.
+ * Return: height of the tree.
  */
 static size_t _tree_height(const binary_tree_t *const tree)
 {

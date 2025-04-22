@@ -3,3 +3,6 @@
 
 # ignore binary files
 tests/bin/*
+
+# ignore object files
+obj/*
