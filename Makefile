@@ -32,7 +32,7 @@ clean:
 $(TESTS_BIN_DIR):
 	mkdir -p $@
 
-$(TESTS_BIN_DIR)/test_binary_tree_print: $(BASIC_BST_FILES) $(ARR_BST) $(DELETION_FILES) $(TESTS_DIR)/test_binary_tree_print.c | $(TESTS_BIN_DIR)
+$(TESTS_BIN_DIR)/test_binary_tree_print: $(BASIC_BST_FILES) $(ARR_BST) 124-sorted_array_to_avl.c $(DELETION_FILES) $(TESTS_DIR)/test_binary_tree_print.c | $(TESTS_BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TESTS_BIN_DIR)/test_%: $(BASIC_BST_FILES) $(ARR_BST) $(DELETION_FILES) $(TESTS_DIR)/test_%.c %.c | $(TESTS_BIN_DIR)
