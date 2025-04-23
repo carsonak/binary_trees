@@ -141,3 +141,6 @@ $(TESTS_BIN_DIR)/%remove: $(BASIC_AVL_FILES) $(ARR_AVL) $(TESTS_DIR)/%main.c %$(
 $(TESTS_BIN_DIR)/%sorted_array_to_avl: C_STANDARD:=--std=c99
 $(TESTS_BIN_DIR)/%sorted_array_to_avl: $(BINARY_TREE_BASICS) $(TESTS_DIR)/%main.c %sorted_array_to_avl.c | $(TESTS_BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
+
+$(TESTS_BIN_DIR)/%is_heap: $(BINARY_TREE_BASICS) $(TESTS_DIR)/%main.c %$(BINARY_TREE_PREFIX)is_heap.c | $(TESTS_BIN_DIR)
+	$(CC) $(CFLAGS) -o $@ $^

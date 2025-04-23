@@ -3,13 +3,13 @@
 typedef void delete_func(const binary_tree_t *);
 
 /**
- * dq_push_head - add a node to the head of the deque_v.
- * @dq: pointer to the deque_v.
+ * dq_push_head - add a node to the head of the deque.
+ * @dq: pointer to the deque.
  * @node: pointer to the node to be added.
  *
- * Return: pointer to the head of the deque_v, NULL on failure.
+ * Return: pointer to the head of the deque, NULL on failure.
  */
-dln_v *dq_push_head(deque_v * const dq, dln_v * const node)
+dln_v *dq_push_head(deque_v * const dq, dln_v *const node)
 {
 	if (!dq || !node)
 		return (NULL);
@@ -27,13 +27,13 @@ dln_v *dq_push_head(deque_v * const dq, dln_v * const node)
 }
 
 /**
- * dq_push_tail - add a node to the tail of the deque_v.
- * @dq: pointer to the deque_v.
+ * dq_push_tail - add a node to the tail of the deque.
+ * @dq: pointer to the deque.
  * @node: pointer to the node to be added.
  *
- * Return: pointer to the tail of the deque_v, NULL on failure.
+ * Return: pointer to the tail of the deque, NULL on failure.
  */
-dln_v *dq_push_tail(deque_v * const dq, dln_v * const node)
+dln_v *dq_push_tail(deque_v * const dq, dln_v *const node)
 {
 	if (!dq || !node)
 		return (NULL);
@@ -51,11 +51,11 @@ dln_v *dq_push_tail(deque_v * const dq, dln_v * const node)
 }
 
 /**
- * dq_pop_head - remove a node from the head of the deque_v.
- * @dq: pointer to the deque_v.
- * @free_data: pointer to a function that frees data in a deque_v node.
+ * dq_pop_head - remove a node from the head of the deque.
+ * @dq: pointer to the deque.
+ * @free_data: pointer to a function that frees data in a deque node.
  *
- * Return: pointer to the new head of the deque_v.
+ * Return: pointer to the new head of the deque.
  */
 dln_v *dq_pop_head(deque_v * const dq, delete_func * const free_data)
 {
@@ -87,8 +87,8 @@ dln_v *dq_pop_head(deque_v * const dq, delete_func * const free_data)
 
 /**
  * dq_delete - free all the nodes of a queue.
- * @dq: pointer to the deque_v.
- * @free_data: pointer to a function that frees data in a deque_v node.
+ * @dq: pointer to the deque.
+ * @free_data: pointer to a function that frees data in a deque node.
  */
 void dq_delete(deque_v * const dq, delete_func * const free_data)
 {
@@ -119,7 +119,7 @@ void dq_delete(deque_v * const dq, delete_func * const free_data)
  *
  * Return: pointer to the created node.
  */
-dln_v *create_node(const binary_tree_t * const data)
+dln_v *create_node(const binary_tree_t *const data)
 {
 	dln_v *node = calloc(1, sizeof(*node));
 
@@ -130,16 +130,16 @@ dln_v *create_node(const binary_tree_t * const data)
 }
 
 /**
- * binary_tree_is_complete - check if a binary tree is complete.
+ * binary_tree_is_heap - check if a binary tree is a valid Max Binary Heap.
  * @tree: a pointer to the root node of the tree.
  *
- * Complete binary tree: A binary tree in which every level,
- * except possibly the last, is completely filled and all nodes in the
- * last level are as far left as possible.
+ * A max binary heap:
+ * Is a complete tree.
+ * Has every node greater than all it's descendants.
  *
- * Return: 1 if the tree is complete, 0 otherwise.
+ * Return: 1 if the tree is a valid Max Binary Heap, 0 otherwise.
  */
-int binary_tree_is_complete(const binary_tree_t * const tree)
+int binary_tree_is_heap(const binary_tree_t *const tree)
 {
 	unsigned char is_last_node = 0;
 	deque_v tree_nodes = {0, NULL, NULL};
@@ -163,7 +163,7 @@ int binary_tree_is_complete(const binary_tree_t * const tree)
 
 			if (node->left)
 			{
-				if (is_last_node ||
+				if (is_last_node || node->n < node->left->n ||
 					!dq_push_tail(&tree_nodes, create_node(node->left)))
 					goto error_cleanup;
 
@@ -173,7 +173,7 @@ int binary_tree_is_complete(const binary_tree_t * const tree)
 
 			if (node->right)
 			{
-				if (is_last_node ||
+				if (is_last_node || node->n < node->right->n ||
 					!dq_push_tail(&tree_nodes, create_node(node->right)))
 					goto error_cleanup;
 			}

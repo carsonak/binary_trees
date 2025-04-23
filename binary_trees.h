@@ -47,6 +47,19 @@ typedef struct doubly_linked_node
 } dln;
 
 /**
+ * struct doubly_linked_node_view - a doubly linked list node with const data.
+ * @next: the next node in the linked list.
+ * @prev: the previous node in the linked list.
+ * @data: the const data the linked list node holds.
+ */
+typedef struct doubly_linked_node_view
+{
+	struct doubly_linked_node_view *next;
+	struct doubly_linked_node_view *prev;
+	const binary_tree_t *data;
+} dln_v;
+
+/**
  * struct double_ended_queue - a deque object.
  * @size: number of nodes in the list.
  * @head: a pointer to the head of the queue.
@@ -58,6 +71,19 @@ typedef struct double_ended_queue
 	dln *head;
 	dln *tail;
 } deque;
+
+/**
+ * struct double_ended_queue_view - a deque object holding const data.
+ * @size: number of nodes in the list.
+ * @head: a pointer to the head of the queue.
+ * @tail: a pointer to the tail of the queue.
+ */
+typedef struct double_ended_queue_view
+{
+	intmax_t size;
+	dln_v *head;
+	dln_v *tail;
+} deque_v;
 
 /**
  * struct node_depth - pointer to a binary tree node and its depth in the tree.
@@ -101,7 +127,7 @@ binary_tree_t *binary_trees_ancestor(
 	const binary_tree_t *const first, const binary_tree_t *const second
 );
 void binary_tree_levelorder(binary_tree_t *const tree, void (*func)(int));
-int binary_tree_is_complete(binary_tree_t *const tree);
+int binary_tree_is_complete(const binary_tree_t *const tree);
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree);
 int binary_tree_is_bst(const binary_tree_t *const tree);
@@ -114,5 +140,6 @@ avl_t *avl_insert(avl_t **const tree, const int value);
 avl_t *array_to_avl(const int *const array, const size_t size);
 avl_t *avl_remove(avl_t *root, const int value);
 avl_t *sorted_array_to_avl(const int *const array, const size_t size);
+int binary_tree_is_heap(const binary_tree_t *tree);
 
 #endif /* BINARY_TREES_H */
