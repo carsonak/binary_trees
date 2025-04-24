@@ -123,19 +123,19 @@ void avl_rebalance_remove(avl_t **const root, avl_t *const edited_node)
 	for (current = edited_node; current; current = current->parent)
 	{
 		int balance = binary_tree_balance(current);
-		avl_t **parent_link = NULL;
+		avl_t **node_address = NULL;
 
 		if (abs(balance) < 2)
 			continue;
 
 		if (!current->parent)
-			parent_link = root;
+			node_address = root;
 		else
 		{
 			if (current->parent->right == current)
-				parent_link = &current->parent->right;
+				node_address = &current->parent->right;
 			else
-				parent_link = &current->parent->left;
+				node_address = &current->parent->left;
 		}
 
 		if (balance < 0) /* Sub-tree is right heavy. */
@@ -144,7 +144,7 @@ void avl_rebalance_remove(avl_t **const root, avl_t *const edited_node)
 			if (binary_tree_balance(current->right) > 0)
 				current->right = binary_tree_rotate_right(current->right);
 
-			*parent_link = binary_tree_rotate_left(current);
+			*node_address = binary_tree_rotate_left(current);
 		}
 		else
 		{
@@ -152,7 +152,7 @@ void avl_rebalance_remove(avl_t **const root, avl_t *const edited_node)
 			if (binary_tree_balance(current->left) < 0)
 				current->left = binary_tree_rotate_left(current->left);
 
-			*parent_link = binary_tree_rotate_right(current);
+			*node_address = binary_tree_rotate_right(current);
 		}
 
 		break;

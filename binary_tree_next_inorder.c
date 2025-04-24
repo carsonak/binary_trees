@@ -2,24 +2,24 @@
 
 /**
  * binary_tree_next_inorder - get the next in order node.
- * @root: pointer to the starting node.
+ * @starting_node: pointer to the starting node.
  *
  * Return: pointer to the next in order node,
  * NULL if there is no next in-order node.
  */
-binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root)
+binary_tree_t *binary_tree_next_inorder(binary_tree_t *const starting_node)
 {
 	binary_tree_t *node = NULL;
 
-	if (!root)
+	if (!starting_node)
 		return (NULL);
 
-	if (!root->right)
+	if (!starting_node->right)
 	{
 		/* Retrace steps up the tree to the first left branch off. */
-		binary_tree_t *prev_node = root;
+		binary_tree_t *prev_node = starting_node;
 
-		node = root->parent;
+		node = starting_node->parent;
 		while (node)
 		{
 			if (node->left == prev_node)
@@ -31,7 +31,7 @@ binary_tree_t *binary_tree_next_inorder(binary_tree_t *const root)
 	}
 	else
 	{
-		node = root->right;
+		node = starting_node->right;
 		while (node->left)
 			node = node->left;
 	}

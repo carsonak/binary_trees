@@ -1,4 +1,4 @@
-#include "binary_trees.h"
+#include "../binary_trees.h"
 
 /**
  * main - Entry point
@@ -7,11 +7,9 @@
  */
 int main(void)
 {
-	heap_t *root;
-	heap_t *node;
+	heap_t *root = NULL;
+	heap_t *node = heap_insert(&root, 98);
 
-	root = NULL;
-	node = heap_insert(&root, 98);
 	printf("Inserted: %d\n", node->n);
 	binary_tree_print(root);
 	node = heap_insert(&root, 402);

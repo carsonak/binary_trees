@@ -3,7 +3,6 @@
 /**
  * binary_tree_unlink_node - unlink a node from a binary tree replacing it with
  * its next in order successor.
- * @root: pointer to the address of the root node of the tree.
  * @to_unlink: pointer to the node to unlink.
  *
  * Return: pointer to the successor node.

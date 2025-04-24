@@ -7,7 +7,7 @@ while read -r line
 do test_files+=("$line")
 done < <(
     find . -maxdepth 1 -name '[[:digit:]]*.c' -type f | 
-    sed -E -e 's/\.\/([[:digit:]]+-)(binary_trees?_|bst_|avl_)?(\w+)\.c$/tests\/bin\/\1\3/'
+    sed -E -e 's/\.\/([[:digit:]]+-)(binary_trees?_|bst_|avl_|heap_)?(\w+)\.c$/tests\/bin\/\1\3/'
 )
 
 COLOUR_GREEN='\033[1;92m'

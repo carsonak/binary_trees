@@ -2,36 +2,6 @@
 
 typedef void delete_func(binary_tree_t *);
 
-dln *dq_push_head(deque * const dq, dln * const node);
-dln *dq_push_tail(deque * const dq, dln * const node);
-dln *dq_pop_head(deque * const dq, delete_func * const free_data);
-dln *dq_pop_tail(deque * const dq, delete_func * const free_data);
-void dq_delete(deque * const dq, delete_func * const free_data);
-
-/**
- * dq_push_head - add a node to the head of the deque.
- * @dq: pointer to the deque.
- * @node: pointer to the node to be added.
- *
- * Return: pointer to the head of the deque, NULL on failure.
- */
-dln *dq_push_head(deque * const dq, dln * const node)
-{
-	if (!dq || !node)
-		return (NULL);
-
-	node->next = dq->head;
-	node->prev = NULL;
-	if (dq->head)
-		dq->head->prev = node;
-	else
-		dq->tail = node;
-
-	dq->head = node;
-	++(dq->size);
-	return (node);
-}
-
 /**
  * dq_push_tail - add a node to the tail of the deque.
  * @dq: pointer to the deque.
@@ -92,41 +62,6 @@ dln *dq_pop_head(deque * const dq, delete_func * const free_data)
 }
 
 /**
- * dq_pop_tail - remove a node from the tail of the deque.
- * @dq: pointer to the deque.
- * @free_data: pointer to a function that frees data in the node.
- *
- * Return: pointer to the new tail of the deque.
- */
-dln *dq_pop_tail(deque * const dq, delete_func * const free_data)
-{
-	dln *to_pop = NULL;
-
-	if (!dq || !dq->tail)
-		return (NULL);
-
-	to_pop = dq->tail;
-	dq->tail = to_pop->prev;
-	if (to_pop == dq->head)
-	{
-		dq->head = NULL;
-		dq->size = 0;
-	}
-
-	if (free_data)
-		free_data(to_pop->data);
-
-	to_pop->data = NULL;
-	to_pop->prev = NULL;
-	to_pop->next = NULL;
-	free(to_pop);
-	if (dq->size > 0)
-		--(dq->size);
-
-	return (dq->tail);
-}
-
-/**
  * dq_delete - free all the nodes of a queue.
  * @dq: pointer to the deque.
  * @free_data: pointer to a function that frees data in a deque node.
@@ -182,7 +117,7 @@ void binary_tree_levelorder(binary_tree_t *const tree, void (*print_data)(int))
 	if (!tree || !print_data)
 		return;
 
-	if (!dq_push_head(&tree_nodes, create_node(tree)))
+	if (!dq_push_tail(&tree_nodes, create_node(tree)))
 		return;
 
 	while (tree_nodes.size)

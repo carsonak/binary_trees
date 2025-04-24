@@ -150,7 +150,7 @@ int binary_tree_is_heap(const binary_tree_t *const tree)
 	if (!dq_push_head(&tree_nodes, create_node(tree)))
 		return (0);
 
-	while (tree_nodes.size)
+	while (tree_nodes.size > 0)
 	{
 		size_t i = 0, prev_size = tree_nodes.size;
 

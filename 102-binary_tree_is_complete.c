@@ -3,30 +3,6 @@
 typedef void delete_func(const binary_tree_t *);
 
 /**
- * dq_push_head - add a node to the head of the deque_v.
- * @dq: pointer to the deque_v.
- * @node: pointer to the node to be added.
- *
- * Return: pointer to the head of the deque_v, NULL on failure.
- */
-dln_v *dq_push_head(deque_v * const dq, dln_v * const node)
-{
-	if (!dq || !node)
-		return (NULL);
-
-	node->next = dq->head;
-	node->prev = NULL;
-	if (dq->head)
-		dq->head->prev = node;
-	else
-		dq->tail = node;
-
-	dq->head = node;
-	++(dq->size);
-	return (node);
-}
-
-/**
  * dq_push_tail - add a node to the tail of the deque_v.
  * @dq: pointer to the deque_v.
  * @node: pointer to the node to be added.
@@ -147,10 +123,10 @@ int binary_tree_is_complete(const binary_tree_t * const tree)
 	if (!tree)
 		return (0);
 
-	if (!dq_push_head(&tree_nodes, create_node(tree)))
+	if (!dq_push_tail(&tree_nodes, create_node(tree)))
 		return (0);
 
-	while (tree_nodes.size)
+	while (tree_nodes.size > 0)
 	{
 		size_t i = 0, prev_size = tree_nodes.size;
 

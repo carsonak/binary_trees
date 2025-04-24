@@ -141,5 +141,6 @@ avl_t *array_to_avl(const int *const array, const size_t size);
 avl_t *avl_remove(avl_t *root, const int value);
 avl_t *sorted_array_to_avl(const int *const array, const size_t size);
 int binary_tree_is_heap(const binary_tree_t *tree);
+heap_t *heap_insert(heap_t **const root, const int value);
 
 #endif /* BINARY_TREES_H */
